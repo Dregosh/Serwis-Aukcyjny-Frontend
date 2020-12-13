@@ -1,0 +1,10 @@
+<mat-card>
+  <img mat-card-image [src]="photoUrl + auction.mainPhotoName" alt="Auction image">
+  <mat-card-content>
+    <h1>{{auction.title}}</h1>
+    <div class="justify-content-around">
+      <div *ngIf="!auction.alreadyBidded">Kup Teraz: {{auction.buyNowPrice}}</div>
+      <div>Licytuj: {{auction.bidPrice}}</div>
+    </div>
+  </mat-card-content>
+</mat-card>

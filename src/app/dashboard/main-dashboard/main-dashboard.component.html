@@ -1,0 +1,32 @@
+<ng-container *ngIf="dashboard$ | async as dashboard">
+  <div class="m-3">
+    <app-auction-belt [auctions]="dashboard.lastAdded" [title]="'Ostatnio dodane'">
+    </app-auction-belt>
+  </div>
+
+  <div class="m-3">
+    <app-auction-belt [auctions]="dashboard.nearlyEnd" [title]="'Kończące się'">
+    </app-auction-belt>
+  </div>
+
+  <div class="m-3" *ngIf="dashboard.loggedUserAuctions.length > 0">
+    <app-auction-belt [auctions]="dashboard.loggedUserAuctions" [title]="'Dodane przez uzytkownika'">
+    </app-auction-belt>
+  </div>
+
+  <div class="m-3" *ngIf="dashboard.biddedAuctions.length > 0">
+    <app-auction-belt [auctions]="dashboard.biddedAuctions" [title]="'Licytowane'">
+    </app-auction-belt>
+  </div>
+
+  <div class="m-3" *ngIf="dashboard.observedAuctions.length > 0">
+    <app-auction-belt [auctions]="dashboard.observedAuctions" [title]="'Obserwowane'">
+    </app-auction-belt>
+  </div>
+
+  <div class="m-3">
+    <app-auction-belt [auctions]="dashboard.justFinished" [title]="'Zakończone'">
+    </app-auction-belt>
+  </div>
+
+</ng-container>
