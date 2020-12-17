@@ -15,6 +15,8 @@ import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import { SingleAuctionCardComponent } from './shared/single-auction-card/single-auction-card.component';
 import { AuctionBeltComponent } from './shared/auction-belt/auction-belt.component';
+import {OAuthModule} from 'angular-oauth2-oidc';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { AuctionBeltComponent } from './shared/auction-belt/auction-belt.compone
     MainDashboardComponent,
     CategoriesComponent,
     SingleAuctionCardComponent,
-    AuctionBeltComponent
+    AuctionBeltComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,13 @@ import { AuctionBeltComponent } from './shared/auction-belt/auction-belt.compone
     HttpClientModule,
     MatCardModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    OAuthModule.forRoot({
+      resourceServer: {
+        allowedUrls: ['http://localhost:8080/api'],
+        sendAccessToken: true
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

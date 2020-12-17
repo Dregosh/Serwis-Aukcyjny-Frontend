@@ -1,0 +1,14 @@
+<mat-card class="m-3">
+  <mat-card-title>Dane zalogowanego użytkownika</mat-card-title>
+  <mat-card-content>
+    <br>
+    <p>Nazwa użytkownika: {{loggedUser.displayName}}</p>
+    <p>E-mail: {{loggedUser.email}}</p>
+    <p>Imię: {{loggedUser.firstName}}</p>
+    <p>Nazwisko: {{loggedUser.lastName}}</p>
+    <p></p>
+    <p>Adres:</p>
+    <p>ul. {{loggedUser.addressStreet}} {{loggedUser.addressNumber}}</p>
+    <p>{{loggedUser.addressPostal}} {{loggedUser.addressCity}}</p>
+  </mat-card-content>
+</mat-card>
