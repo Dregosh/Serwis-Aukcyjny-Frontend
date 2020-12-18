@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {EditUserDTO} from './model/editUserDTO';
-import {EditUserService} from './service/edit-user.service';
+import {EditUserDTO} from '../model/editUserDTO';
+import {EditUserService} from '../service/edit-user.service';
 
 @Component({
   selector: 'app-edit-user',
