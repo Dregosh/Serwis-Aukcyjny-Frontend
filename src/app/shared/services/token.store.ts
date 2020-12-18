@@ -11,6 +11,9 @@ export class TokenStore {
   decoder: JwtHelperService;
 
   constructor() {
+    if (this.getToken()) {
+      this.init();
+    }
   }
 
   public init(): void {
@@ -18,7 +21,7 @@ export class TokenStore {
   }
 
   public getToken(): string {
-    return localStorage.getItem(this.TOKEN);
+    return sessionStorage.getItem(this.TOKEN);
   }
 
   public getRefreshToken(): string {
@@ -26,13 +29,14 @@ export class TokenStore {
   }
 
   public clearTokens(): void {
-    localStorage.removeItem(this.TOKEN);
+    sessionStorage.removeItem(this.TOKEN);
     localStorage.removeItem(this.REFRESH_TOKEN);
   }
 
   public setTokens(token: string, refreshToken: string): void {
-    localStorage.setItem(this.TOKEN, token);
+    sessionStorage.setItem(this.TOKEN, token);
     localStorage.setItem(this.REFRESH_TOKEN, refreshToken);
+    this.init();
   }
 
   public setToken(token: string): void {
