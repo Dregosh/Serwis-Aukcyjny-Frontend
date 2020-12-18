@@ -1,22 +1,17 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {MainDashboardComponent} from './dashboard/main-dashboard/main-dashboard.component';
-import {EditUserComponent} from './edit-user/edit-user.component';
+import {AuctionsRoutingModule} from './auctions/auctions-routing.module';
+import {AuthRoutingModule} from './auth/auth-routing.module';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full'
+    loadChildren: () => AuctionsRoutingModule
   },
   {
-    path: 'dashboard',
-    component: MainDashboardComponent
+    path: 'auth',
+    loadChildren: () => AuthRoutingModule
   },
-  {
-    path: 'my-account',
-    component: EditUserComponent
-  }
 ];
 
 @NgModule({

@@ -24,8 +24,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/login"
-           [hidden]="authenticationService.isLogged()"
-           (click)="authenticationService.login()">Zaloguj</a>
+           [hidden]="authenticationService.isLogged()">Zaloguj</a>
       </li>
     </ul>
   </div>
