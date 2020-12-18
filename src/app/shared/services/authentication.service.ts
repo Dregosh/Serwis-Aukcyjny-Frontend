@@ -5,6 +5,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {TokenResponse} from '../model/token-response';
 import {switchMap, tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class AuthenticationService {
     return this.tokenStore.getToken() && this.tokenStore.isEmailVerified();
   }
 
-  public login(login: string, pass: string, redirectUrl = 'dashboard'): void {
+  public login(login: string, pass: string, redirectUrl = 'dashboard'): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -36,13 +37,12 @@ export class AuthenticationService {
         grant_type: 'password'
       }
     });
-    this.http.post<TokenResponse>(this.keycloakUrl, params, httpOptions)
+    return this.http.post<TokenResponse>(this.keycloakUrl, params, httpOptions)
       .pipe(tap(tokenResponse => this.tokenStore.setTokens(tokenResponse.access_token, tokenResponse.refresh_token)),
-        switchMap(() => this.router.navigate([redirectUrl])))
-      .subscribe();
+        switchMap(() => this.router.navigate([redirectUrl])));
   }
 
-  refreshToken(): void {
+  refreshToken(): Observable<TokenResponse> {
     if (!this.tokenStore.getToken()) {
       return;
     }
@@ -58,22 +58,14 @@ export class AuthenticationService {
         refresh_token: localStorage.getItem('rtoken')
       }
     });
-    this.http.post<TokenResponse>(this.keycloakUrl, params, httpOptions).subscribe(data => {
-      sessionStorage.setItem('token', data.access_token);
-      localStorage.setItem('rtoken', data.refresh_token);
-      sessionStorage.setItem('tokenExpirationDate', new Date(new Date().getTime() + data.expires_in * 1000).toString());
-      sessionStorage.setItem('sessionTime', data.expires_in.toString());
-    }, error => {
-      console.log('Error occured while refreshing session');
-    }, () => {
-    });
+    return this.http.post<TokenResponse>(this.keycloakUrl, params, httpOptions);
   }
 
   public logout(): void {
     this.http.post(`${this.authUrl}auth/logout`, null)
-      .pipe(switchMap(() => this.router.navigate(['dashboard'])))
+      .pipe(
+        tap(() => this.tokenStore.clearTokens()),
+        switchMap(() => this.router.navigate(['dashboard'])))
       .subscribe();
   }
-
-
 }

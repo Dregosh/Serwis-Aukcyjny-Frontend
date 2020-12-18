@@ -7,12 +7,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app-routing.module';
 import {ContentPageComponent} from './content-page/content-page.component';
 import {NavbarComponent} from './shared/navbar/navbar.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {AuctionsModule} from './auctions/auctions.module';
 import {AuthModule} from './auth/auth.module';
+import {TokenInterceptor} from './shared/interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,11 @@ import {AuthModule} from './auth/auth.module';
     AuctionsModule,
     AuthModule,
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
