@@ -8,6 +8,8 @@ import {AuthRoutingModule} from './auth-routing.module';
 import { RegistrationConfirmationComponent } from './registration-confirmation/registration-confirmation.component';
 import { EmailConfirmationComponent } from './email-confirmation/email-confirmation.component';
 import { EmailNotVerifiedComponent } from './email-not-verified/email-not-verified.component';
+import { EmailChangeConfirmationComponent } from './email-change-confirmation/email-change-confirmation.component';
+import { RegistrationPageComponent } from './registration-page/registration-page.component';
 
 
 
@@ -17,7 +19,9 @@ import { EmailNotVerifiedComponent } from './email-not-verified/email-not-verifi
     LoginComponent,
     RegistrationConfirmationComponent,
     EmailConfirmationComponent,
-    EmailNotVerifiedComponent
+    EmailNotVerifiedComponent,
+    EmailChangeConfirmationComponent,
+    RegistrationPageComponent
   ],
   imports: [
     CommonModule,

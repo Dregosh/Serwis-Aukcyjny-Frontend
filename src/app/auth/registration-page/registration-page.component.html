@@ -1,0 +1,91 @@
+<div class="row justify-content-center mt-5">
+  <div class="card" style="width: 50rem;">
+    <div class="card-header">
+      Zarejestruj się
+    </div>
+    <div class="card-body">
+      <form [formGroup]="registerForm">
+        <div class="form-group">
+          <label for="displayName">Nazwa Użytkownika: <span *ngIf="registerForm.get('displayName').invalid"
+                                               style="color: red; font-weight: bold">*</span></label>
+          <input type="text" class="form-control" id="displayName" placeholder="Użytkownik" formControlName="displayName">
+        </div>
+        <div class="form-group">
+          <label for="password">Hasło: <span *ngIf="registerForm.get('password').invalid"
+                                             style="color: red; font-weight: bold">*</span></label>
+          <input id="password" type="password" formControlName="password" class="form-control" placeholder="Hasło">
+        </div>
+        <div class="form-group">
+          <label for="repeatPassword">Powtórz hasło: <span *ngIf="registerForm.get('repeatPassword').invalid"
+                                                           style="color: red; font-weight: bold">*</span></label>
+          <input id="repeatPassword" type="password" formControlName="repeatPassword" class="form-control"
+                 placeholder="Powtórz hasło">
+        </div>
+        <div class="form-group">
+          <label for="email">Email: <span *ngIf="registerForm.get('email').invalid"
+                                          style="color: red; font-weight: bold">*</span></label>
+          <input id="email" type="text" formControlName="email" class="form-control"
+                 placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label for="firstName">Imię: <span *ngIf="registerForm.get('firstName').invalid"
+                                             style="color: red; font-weight: bold">*</span></label>
+          <input id="firstName" type="text" formControlName="firstName" class="form-control"
+                 placeholder="Imię">
+        </div>
+        <div class="form-group">
+          <label for="lastName">Nazwisko: <span *ngIf="registerForm.get('lastName').invalid"
+                                                style="color: red; font-weight: bold">*</span></label>
+          <input id="lastName" type="text" formControlName="lastName" class="form-control"
+                 placeholder="Nazwisko">
+        </div>
+        <div class="form-group">
+          <label for="city">Miasto: <span *ngIf="registerForm.get('city').invalid"
+                                                style="color: red; font-weight: bold">*</span></label>
+          <input id="city" type="text" formControlName="city" class="form-control"
+                 placeholder="Miasto">
+        </div>
+        <div class="form-group">
+          <label for="postal">Kod-pocztowy: <span *ngIf="registerForm.get('postal').invalid"
+                                          style="color: red; font-weight: bold">*</span></label>
+          <input id="postal" type="text" formControlName="postal" class="form-control"
+                 placeholder="Kod Pocztowy">
+        </div>
+        <div class="form-group">
+        <label for="street">Ulica: <span *ngIf="registerForm.get('street').invalid"
+                                         style="color: red; font-weight: bold">*</span></label>
+        <input id="street" type="text" formControlName="street" class="form-control"
+               placeholder="Ulica">
+      </div>
+        <div class="form-group">
+          <label for="houseNumber">Numer domu: <span *ngIf="registerForm.get('houseNumber').invalid"
+                                           style="color: red; font-weight: bold">*</span></label>
+          <input id="houseNumber" type="text" formControlName="houseNumber" class="form-control"
+                 placeholder="Numer domu">
+        </div>
+        <div class="row" style="margin-bottom: 10px">
+          <div class="col-md-12" *ngIf="!registerForm.valid">
+              <span class="text-error" style="color: red">
+                <span class="material-icons" style="position: relative; top: 5px">error</span>
+                <span
+                  style="position: relative; left: 5px; bottom: 2px">Wszystkie pola muszą mieć poprawne wartości</span>
+              </span>
+          </div>
+          <div class="col-md-12" *ngIf="registerForm.valid && errorMessage">
+              <span class="text-error" style="color: red">
+                <span class="material-icons" style="position: relative; top: 5px">error</span>
+                <span
+                  style="position: relative; left: 5px; bottom: 2px">{{errorMessage}}</span>
+              </span>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <button [disabled]="!registerForm.valid" type="submit" class="btn btn-dark" id="login-button"
+                  (click)="onSubmit()">Zarejestruj
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
