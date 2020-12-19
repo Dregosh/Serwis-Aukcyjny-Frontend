@@ -1,77 +1,80 @@
-<mat-card class="m-3">
-  <mat-card-title class="mb-4">Edycja danych użytkownika</mat-card-title>
-  <mat-card-content>
-    <form [formGroup]="editionForm" (ngSubmit)="onSubmit()" novalidate>
-      <div class="form-group">
-        <label for="displayName">Nazwa użytkownika</label>
-        <input type="text" id="displayName" class="form-control"
-               formControlName="displayName" readonly>
-      </div>
-      <div class="form-group">
-        <label for="email">E-mail</label>
-        <input type="email" id="email" class="form-control" formControlName="email"
-               readonly>
-      </div>
-      <div class="form-group">
-        <label for="firstName">Imię</label>
-        <input type="text" id="firstName" class="form-control"
-               formControlName="firstName">
-      </div>
-      <div class="form-group">
-        <label for="lastName">Nazwisko</label>
-        <input type="text" id="lastName" class="form-control"
-               formControlName="lastName">
-      </div>
-      <div formGroupName="address">
+<div class="w-50 ml-auto mr-auto">
+  <mat-card class="m-3">
+    <mat-card-title class="mb-4">Edycja danych użytkownika</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="editionForm" (ngSubmit)="onSubmit()" novalidate>
         <div class="form-group">
-          <label for="street">Ulica</label>
-          <input type="text" id="street" class="form-control"
-                 formControlName="street">
+          <label for="displayName">Nazwa użytkownika</label>
+          <input type="text" id="displayName" class="form-control"
+                 formControlName="displayName" readonly>
         </div>
         <div class="form-group">
-          <label for="number">Numer</label>
-          <input type="text" id="number" class="form-control"
-                 formControlName="number">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" class="form-control" formControlName="email"
+                 readonly>
         </div>
         <div class="form-group">
-          <label for="postal">Kod pocztowy</label>
-          <input type="text" id="postal" class="form-control"
-                 formControlName="postal">
+          <label for="firstName">Imię</label>
+          <input type="text" id="firstName" class="form-control"
+                 formControlName="firstName">
         </div>
         <div class="form-group">
-          <label for="city">Miasto</label>
-          <input type="text" id="city" class="form-control"
-                 formControlName="city">
+          <label for="lastName">Nazwisko</label>
+          <input type="text" id="lastName" class="form-control"
+                 formControlName="lastName">
         </div>
-      </div>
-      <button class="btn btn-primary" type="submit">Zapisz zmiany</button>
-    </form>
-  </mat-card-content>
-</mat-card>
-<mat-card class="m-3">
-  <mat-card-content>
-    <form [formGroup]="emailChangeForm" (ngSubmit)="onSubmitEmailChange()"
-          novalidate>
-      <div class="form-group">
-        <label for="newEmail">Nowy e-mail</label>
-        <input type="email" id="newEmail" class="form-control"
-               formControlName="newEmail">
-      </div>
-      <div class="form-group">
-        <label for="confirmNewEmail">Nowy e-mail (powtórnie)</label>
-        <input type="email" id="confirmNewEmail" class="form-control"
-               formControlName="confirmNewEmail">
-      </div>
-      <button class="btn btn-primary" type="submit">Zmień adres e-mail</button>
-      <p class="m-3" [class.d-none]="!initiatedEmailChange">Prośba o potwierdzenie zmiany
-        została wysłana na nowy adres e-mail</p>
-    </form>
-  </mat-card-content>
-</mat-card>
-<mat-card class="m-3">
-  <mat-card-content>
-    <button class="btn btn-info" type="button"
-            (click)="onPasswordChange()">Zmień hasło
-    </button>
-  </mat-card-content>
-</mat-card>
+        <div formGroupName="address">
+          <div class="form-group">
+            <label for="street">Ulica</label>
+            <input type="text" id="street" class="form-control"
+                   formControlName="street">
+          </div>
+          <div class="form-group">
+            <label for="number">Numer</label>
+            <input type="text" id="number" class="form-control"
+                   formControlName="number">
+          </div>
+          <div class="form-group">
+            <label for="postal">Kod pocztowy</label>
+            <input type="text" id="postal" class="form-control"
+                   formControlName="postal">
+          </div>
+          <div class="form-group">
+            <label for="city">Miasto</label>
+            <input type="text" id="city" class="form-control"
+                   formControlName="city">
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Zapisz zmiany</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="m-3">
+    <mat-card-content>
+      <form [formGroup]="emailChangeForm" (ngSubmit)="onSubmitEmailChange()"
+            novalidate>
+        <div class="form-group">
+          <label for="newEmail">Nowy e-mail</label>
+          <input type="email" id="newEmail" class="form-control"
+                 formControlName="newEmail">
+        </div>
+        <div class="form-group">
+          <label for="confirmNewEmail">Nowy e-mail (powtórnie)</label>
+          <input type="email" id="confirmNewEmail" class="form-control"
+                 formControlName="confirmNewEmail">
+        </div>
+        <button class="btn btn-primary" type="submit">Zmień adres e-mail</button>
+        <p class="m-3" [class.d-none]="!initiatedEmailChange">Prośba o potwierdzenie
+          zmiany
+          została wysłana na nowy adres e-mail</p>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="m-3">
+    <mat-card-content>
+      <button class="btn btn-info" type="button"
+              (click)="onPasswordChange()">Zmień hasło
+      </button>
+    </mat-card-content>
+  </mat-card>
+</div>

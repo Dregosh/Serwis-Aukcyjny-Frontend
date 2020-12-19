@@ -82,4 +82,9 @@ export class AuthenticationService {
     const header = new HttpHeaders().append('Authorization', `Bearer ${this.tokenStore.getToken()}`);
     return this.http.post(`${this.authUrl}auth/resending-verification-code`, null, {headers: header});
   }
+
+  public confirmEmailChange(token: string): Observable<any> {
+    return this.http.post(`${this.authUrl}edit-user/update-email-confirmation`,
+      {token});
+  }
 }

@@ -5,6 +5,7 @@ import {LoginComponent} from './login/login.component';
 import {RegistrationConfirmationComponent} from './registration-confirmation/registration-confirmation.component';
 import {EmailConfirmationComponent} from './email-confirmation/email-confirmation.component';
 import {EmailNotVerifiedComponent} from './email-not-verified/email-not-verified.component';
+import {EmailChangeConfirmationComponent} from './email-change-confirmation/email-change-confirmation.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'not-verified',
     component: EmailNotVerifiedComponent
+  },
+  {
+    path: 'email-change-confirm/:token',
+    component: EmailChangeConfirmationComponent
   }
 ];
 
