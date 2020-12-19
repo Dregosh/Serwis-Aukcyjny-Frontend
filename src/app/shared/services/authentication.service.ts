@@ -55,7 +55,7 @@ export class AuthenticationService {
     const params = new HttpParams({
       fromObject: {
         grant_type: 'refresh_token',
-        refresh_token: localStorage.getItem('rtoken')
+        refresh_token: this.tokenStore.getRefreshToken()
       }
     });
     return this.http.post<TokenResponse>(this.keycloakUrl, params, httpOptions);
