@@ -1,0 +1,11 @@
+<div class="row justify-content-center mt-5">
+    <div class="card">
+      <div class="card-header">Potwierdzenie konta</div>
+      <div class="card-body">
+
+          <h3 *ngIf="!resend">Twoje konto nie zostało jeszcze potwierdzone, kliknij <span (click)="resendVerificationCode()">tutaj</span> aby ponownie wysłać link do weryfikacji</h3>
+          <h3 *ngIf="resend">Link do weryfikacji został wysłany na Twoje konto email</h3>
+      </div>
+    </div>
+
+</div>

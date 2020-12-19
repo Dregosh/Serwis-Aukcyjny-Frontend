@@ -3,6 +3,8 @@ import {EditUserComponent} from './edit-user/edit-user.component';
 import {NgModule} from '@angular/core';
 import {LoginComponent} from './login/login.component';
 import {RegistrationConfirmationComponent} from './registration-confirmation/registration-confirmation.component';
+import {EmailConfirmationComponent} from './email-confirmation/email-confirmation.component';
+import {EmailNotVerifiedComponent} from './email-not-verified/email-not-verified.component';
 
 const routes: Routes = [
   {
@@ -20,6 +22,14 @@ const routes: Routes = [
   }, {
     path: 'registration-completed',
     component: RegistrationConfirmationComponent
+  },
+  {
+    path: 'verification/:token',
+    component: EmailConfirmationComponent
+  },
+  {
+    path: 'not-verified',
+    component: EmailNotVerifiedComponent
   }
 ];
 
