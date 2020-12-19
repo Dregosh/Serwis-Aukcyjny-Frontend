@@ -16,7 +16,11 @@ const routes: Routes = [
   {
     path: 'my-account',
     component: EditUserComponent
-  }
+  },
+  /*{
+    path: 'emailchange/:df',
+    component: EmailChangeConfirmedComponent
+  }*/
 ];
 
 @NgModule({
