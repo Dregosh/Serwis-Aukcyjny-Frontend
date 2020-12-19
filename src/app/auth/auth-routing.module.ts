@@ -2,6 +2,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {EditUserComponent} from './edit-user/edit-user.component';
 import {NgModule} from '@angular/core';
 import {LoginComponent} from './login/login.component';
+import {RegistrationConfirmationComponent} from './registration-confirmation/registration-confirmation.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,9 @@ const routes: Routes = [
   {
     path: 'my-account',
     component: EditUserComponent
+  }, {
+    path: 'registration-completed',
+    component: RegistrationConfirmationComponent
   }
 ];
 
