@@ -39,7 +39,12 @@ export class AuthenticationService {
     });
     return this.http.post<TokenResponse>(this.keycloakUrl, params, httpOptions)
       .pipe(tap(tokenResponse => this.tokenStore.setTokens(tokenResponse.access_token, tokenResponse.refresh_token)),
-        switchMap(() => this.router.navigate([redirectUrl])));
+        switchMap(() => {
+          if (this.tokenStore.isEmailVerified()) {
+            return this.router.navigate([redirectUrl]);
+          }
+          return this.router.navigate(['auth/not-verified']);
+        }));
   }
 
   refreshToken(): Observable<TokenResponse> {
@@ -67,5 +72,14 @@ export class AuthenticationService {
         tap(() => this.tokenStore.clearTokens()),
         switchMap(() => this.router.navigate(['dashboard'])))
       .subscribe();
+  }
+
+  public confirmAccount(token: string): Observable<any> {
+    return this.http.post(`${this.authUrl}auth/email-verification`, {token});
+  }
+
+  public resendVerificationCode(): Observable<any> {
+    const header = new HttpHeaders().append('Authorization', `Bearer ${this.tokenStore.getToken()}`);
+    return this.http.post(`${this.authUrl}auth/resending-verification-code`, null, {headers: header});
   }
 }
