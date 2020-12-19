@@ -3,7 +3,6 @@ import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {EditUserDTO} from '../model/editUserDTO';
-import {UpdateEmailRequestCommandDTO} from '../model/updateEmailRequestCommandDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +24,15 @@ export class EditUserService {
         editUserDTO);
   }
 
-  public updateUserEmail(command: UpdateEmailRequestCommandDTO): Observable<any> {
-    return this.httpClient
-      .post<any>(`${this.apiUrl}edit-user/update-email-request`, command);
+  public updateUserEmail(command: any): Observable<any> {
+    return this.httpClient.post<any>(`${this.apiUrl}edit-user/update-email-request`, command);
+  }
+
+  public changePasswordRequest(): Observable<any> {
+    return this.httpClient.get(`${this.apiUrl}edit-user/change-password-request`);
+  }
+
+  public executePasswordChange(command: { newPassword: string; token: string }): Observable<any> {
+    return this.httpClient.post<any>(`${this.apiUrl}change-password-confirmed`, command);
   }
 }

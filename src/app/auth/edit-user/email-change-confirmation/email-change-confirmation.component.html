@@ -1,0 +1,25 @@
+<div class="row justify-content-center mt-5">
+  <ng-container *ngIf="isDone">
+    <div class="card text-center">
+      <div class="card-header">Potwierdzenie zmiany adresu e-mail</div>
+      <div class="card-body">
+        <ng-container *ngIf="isConfirmed">
+          <h3>Zmiana adresu e-mail została przeprowadzona pomyślnie</h3>
+        </ng-container>
+        <ng-container *ngIf="!isConfirmed">
+          <h3 style="color: red">Link do potwierdzenia zmiany wygasł lub jest
+            nieprawidłowy.</h3>
+          <h3 style="color: red">Zainicjuj procedurę zmiany ponownie</h3>
+        </ng-container>
+        <button class="btn btn-primary" (click)="onClick()">Powrót na stronę główną</button>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!isDone">
+    <div class="d-flex justify-content-center">
+      <div class="spinner-grow  vertical-center" style="width: 5rem; height: 5rem;" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </ng-container>
+</div>

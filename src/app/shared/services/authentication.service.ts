@@ -94,7 +94,7 @@ export class AuthenticationService {
   }
 
   public confirmEmailChange(token: string): Observable<any> {
-    return this.http.post(`${this.authUrl}edit-user/update-email-confirmation`,
+    return this.http.post(`${this.authUrl}update-email-confirmation`,
       {token});
   }
 }

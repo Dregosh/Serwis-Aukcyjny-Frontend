@@ -5,8 +5,10 @@ import {LoginComponent} from './login/login.component';
 import {RegistrationConfirmationComponent} from './registration-confirmation/registration-confirmation.component';
 import {EmailConfirmationComponent} from './email-confirmation/email-confirmation.component';
 import {EmailNotVerifiedComponent} from './email-not-verified/email-not-verified.component';
-import {EmailChangeConfirmationComponent} from './email-change-confirmation/email-change-confirmation.component';
+import {EmailChangeConfirmationComponent} from './edit-user/email-change-confirmation/email-change-confirmation.component';
 import {RegistrationPageComponent} from './registration-page/registration-page.component';
+import {EmailChangeRequestConfirmationComponent} from './edit-user/email-change-request-confirmation/email-change-request-confirmation.component';
+import {PasswordChangeFormComponent} from './edit-user/password-change-form/password-change-form.component';
 
 const routes: Routes = [
   {
@@ -34,12 +36,20 @@ const routes: Routes = [
     component: EmailNotVerifiedComponent
   },
   {
+    path: 'email-change-request-confirm',
+    component: EmailChangeRequestConfirmationComponent
+  },
+  {
     path: 'email-change-confirm/:token',
     component: EmailChangeConfirmationComponent
   },
   {
     path: 'registration',
     component: RegistrationPageComponent
+  },
+  {
+    path: 'password-change-form/:token',
+    component: PasswordChangeFormComponent
   }
 ];
 

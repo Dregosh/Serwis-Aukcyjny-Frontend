@@ -3,78 +3,126 @@
     <mat-card-title class="mb-4">Edycja danych użytkownika</mat-card-title>
     <mat-card-content>
       <form [formGroup]="editionForm" (ngSubmit)="onSubmit()" novalidate>
+
         <div class="form-group">
           <label for="displayName">Nazwa użytkownika</label>
           <input type="text" id="displayName" class="form-control"
                  formControlName="displayName" readonly>
         </div>
+
         <div class="form-group">
           <label for="email">E-mail</label>
           <input type="email" id="email" class="form-control" formControlName="email"
                  readonly>
         </div>
+
         <div class="form-group">
           <label for="firstName">Imię</label>
           <input type="text" id="firstName" class="form-control"
-                 formControlName="firstName">
+                 formControlName="firstName"
+                 [class.is-invalid]="firstName.invalid && firstName.touched">
+          <small [class.d-none]="firstName.valid || firstName.untouched"
+                 class="text-danger">Imię jest wymagane</small>
         </div>
+
         <div class="form-group">
           <label for="lastName">Nazwisko</label>
           <input type="text" id="lastName" class="form-control"
-                 formControlName="lastName">
+                 formControlName="lastName"
+                 [class.is-invalid]="lastName.invalid && lastName.touched">
+          <small [class.d-none]="lastName.valid || lastName.untouched"
+                 class="text-danger">Nazwisko jest wymagane</small>
         </div>
+
         <div formGroupName="address">
           <div class="form-group">
             <label for="street">Ulica</label>
             <input type="text" id="street" class="form-control"
-                   formControlName="street">
+                   formControlName="street"
+                   [class.is-invalid]="street.invalid && street.touched">
+            <small [class.d-none]="street.valid || street.untouched"
+                   class="text-danger">Ulica jest wymagana</small>
           </div>
+
           <div class="form-group">
             <label for="number">Numer</label>
             <input type="text" id="number" class="form-control"
-                   formControlName="number">
+                   formControlName="number"
+                   [class.is-invalid]="number.invalid && number.touched">
+            <small [class.d-none]="number.valid || number.untouched"
+                   class="text-danger">Wymagany jest numer ulicy (oraz ewentualnie
+              mieszkania)</small>
           </div>
+
           <div class="form-group">
             <label for="postal">Kod pocztowy</label>
             <input type="text" id="postal" class="form-control"
-                   formControlName="postal">
+                   formControlName="postal"
+                   [class.is-invalid]="postal.invalid && postal.touched">
+            <small [class.d-none]="postal.valid || postal.untouched"
+                   class="text-danger">Kod pocztowy jest wymagane</small>
           </div>
+
           <div class="form-group">
             <label for="city">Miasto</label>
             <input type="text" id="city" class="form-control"
-                   formControlName="city">
+                   formControlName="city"
+                   [class.is-invalid]="city.invalid && city.touched">
+            <small [class.d-none]="city.valid || city.untouched"
+                   class="text-danger">Miasto jest wymagane</small>
           </div>
         </div>
-        <button class="btn btn-primary" type="submit">Zapisz zmiany</button>
+        <button class="btn btn-primary" type="submit"
+                [disabled]="!editionForm.valid || editionForm.pristine">Zapisz
+          zmiany
+        </button>
+        <small class="text-info ml-5" *ngIf="savedDataInfo">{{savedDataInfo}}</small>
       </form>
     </mat-card-content>
   </mat-card>
+
   <mat-card class="m-3">
+    <mat-card-title class="mb-4">Zmiana adresu e-mail</mat-card-title>
     <mat-card-content>
       <form [formGroup]="emailChangeForm" (ngSubmit)="onSubmitEmailChange()"
             novalidate>
+
         <div class="form-group">
           <label for="newEmail">Nowy e-mail</label>
-          <input type="email" id="newEmail" class="form-control"
-                 formControlName="newEmail">
+          <input type="email" [class.is-invalid]="newEmail.invalid && newEmail.touched"
+                 id="newEmail" formControlName="newEmail" class="form-control">
+          <div *ngIf="newEmail.invalid && newEmail.touched">
+            <small *ngIf="newEmail.errors?.required" class="text-danger">Nowy adres e-mail
+              jest niezbędny do dokonania zmiany</small>
+            <small *ngIf="newEmail.errors?.email" class="text-danger">Niepoprawny adres
+              e-mail</small>
+          </div>
         </div>
-        <div class="form-group">
+
+        <div class="form-group mt-3">
           <label for="confirmNewEmail">Nowy e-mail (powtórnie)</label>
-          <input type="email" id="confirmNewEmail" class="form-control"
+          <input [class.is-invalid]="emailChangeForm.errors?.misMatch" type="email"
+                 id="confirmNewEmail" class="form-control"
                  formControlName="confirmNewEmail">
+          <small class="text-danger"
+                 *ngIf="emailChangeForm.errors?.misMatch">Podane adresy
+            e-mail nie są identyczne</small>
+          <small class="text-danger" *ngIf="errorMessage">{{errorMessage}}</small>
         </div>
-        <button class="btn btn-primary" type="submit">Zmień adres e-mail</button>
-        <p class="m-3" [class.d-none]="!initiatedEmailChange">Prośba o potwierdzenie
-          zmiany
-          została wysłana na nowy adres e-mail</p>
+
+        <button class="btn btn-primary" type="submit"
+                [disabled]="!emailChangeForm.valid">Zmień adres e-mail
+        </button>
+
       </form>
     </mat-card-content>
   </mat-card>
   <mat-card class="m-3">
     <mat-card-content>
-      <button class="btn btn-info" type="button"
-              (click)="onPasswordChange()">Zmień hasło
-      </button>
+        <button class="btn btn-info" type="button" [disabled]="changePasswordRequested"
+                (click)="onPasswordChange()">Zmień hasło</button>
+        <span class="ml-3" *ngIf="changePasswordRequested">Wiadomość z linkiem do
+          formularza zmiany hasła została wysłana. Sprawdź pocztę.</span>
     </mat-card-content>
   </mat-card>
 </div>
