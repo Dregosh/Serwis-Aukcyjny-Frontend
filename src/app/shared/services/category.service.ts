@@ -14,10 +14,6 @@ export class CategoryService {
   constructor(private http: HttpClient) {}
 
   public getCategories(): Observable<Category[]> {
-    return of([{
-      id: 1,
-      name: 'Elektronika',
-      iconName: 'computer'
-    }]);
+    return this.http.get<Category[]>(`${this.apiUrl}categories`);
   }
 }
