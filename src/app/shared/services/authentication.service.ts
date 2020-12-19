@@ -6,6 +6,8 @@ import {TokenResponse} from '../model/token-response';
 import {switchMap, tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
+import {UserExist} from '../../auth/registration-page/model/userExist';
+import {Register} from '../../auth/registration-page/model/register';
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +49,7 @@ export class AuthenticationService {
         }));
   }
 
-  refreshToken(): Observable<TokenResponse> {
+  public refreshToken(): Observable<TokenResponse> {
     if (!this.tokenStore.getToken()) {
       return;
     }
@@ -81,6 +83,14 @@ export class AuthenticationService {
   public resendVerificationCode(): Observable<any> {
     const header = new HttpHeaders().append('Authorization', `Bearer ${this.tokenStore.getToken()}`);
     return this.http.post(`${this.authUrl}auth/resending-verification-code`, null, {headers: header});
+  }
+
+  public userExist(displayName: string, email: string): Observable<UserExist> {
+    return this.http.get<UserExist>(`${this.authUrl}auth/existing/${email}/${displayName}`);
+  }
+
+  public registerUser(register: Register): Observable<any> {
+    return this.http.post(`${this.authUrl}auth/register`, register);
   }
 
   public confirmEmailChange(token: string): Observable<any> {

@@ -6,6 +6,7 @@ import {RegistrationConfirmationComponent} from './registration-confirmation/reg
 import {EmailConfirmationComponent} from './email-confirmation/email-confirmation.component';
 import {EmailNotVerifiedComponent} from './email-not-verified/email-not-verified.component';
 import {EmailChangeConfirmationComponent} from './email-change-confirmation/email-change-confirmation.component';
+import {RegistrationPageComponent} from './registration-page/registration-page.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'email-change-confirm/:token',
     component: EmailChangeConfirmationComponent
+  },
+  {
+    path: 'registration',
+    component: RegistrationPageComponent
   }
 ];
 

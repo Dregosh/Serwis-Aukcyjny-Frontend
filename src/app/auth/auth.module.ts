@@ -9,6 +9,7 @@ import { RegistrationConfirmationComponent } from './registration-confirmation/r
 import { EmailConfirmationComponent } from './email-confirmation/email-confirmation.component';
 import { EmailNotVerifiedComponent } from './email-not-verified/email-not-verified.component';
 import { EmailChangeConfirmationComponent } from './email-change-confirmation/email-change-confirmation.component';
+import { RegistrationPageComponent } from './registration-page/registration-page.component';
 
 
 
@@ -19,7 +20,8 @@ import { EmailChangeConfirmationComponent } from './email-change-confirmation/em
     RegistrationConfirmationComponent,
     EmailConfirmationComponent,
     EmailNotVerifiedComponent,
-    EmailChangeConfirmationComponent
+    EmailChangeConfirmationComponent,
+    RegistrationPageComponent
   ],
   imports: [
     CommonModule,
