@@ -9,6 +9,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {AuctionBeltComponent} from '../shared/auction-belt/auction-belt.component';
 import {SingleAuctionCardComponent} from '../shared/single-auction-card/single-auction-card.component';
+import {FlexModule} from '@angular/flex-layout';
 
 
 
@@ -20,12 +21,13 @@ import {SingleAuctionCardComponent} from '../shared/single-auction-card/single-a
     AuctionBeltComponent,
     SingleAuctionCardComponent,
   ],
-  imports: [
-    CommonModule,
-    AuctionsRoutingModule,
-    MatListModule,
-    MatCardModule,
-    MatIconModule
-  ]
+    imports: [
+        CommonModule,
+        AuctionsRoutingModule,
+        MatListModule,
+        MatCardModule,
+        MatIconModule,
+        FlexModule
+    ]
 })
 export class AuctionsModule { }

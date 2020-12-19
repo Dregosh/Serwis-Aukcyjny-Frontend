@@ -1,8 +1,11 @@
-<mat-card>
-  <img mat-card-image [src]="photoUrl + auction.mainPhotoName" alt="Auction image">
+<mat-card [routerLink]="'auction/' + this.auction.id">
+  <div class="row justify-content-center">
+    <mat-card-title>{{auction.title}}</mat-card-title>
+  </div>
+  <img mat-card-image [src]="photoUrl + auction.mainPhotoName" alt="Auction image" *ngIf="auction.mainPhotoName">
+  <img mat-card-image src="/assets/no-photo-big.jpg" alt="Auction image" *ngIf="!auction.mainPhotoName">
   <mat-card-content>
-    <h1>{{auction.title}}</h1>
-    <div class="justify-content-around">
+    <div class="row justify-content-around">
       <div *ngIf="!auction.alreadyBidded">Kup Teraz: {{auction.buyNowPrice}}</div>
       <div>Licytuj: {{auction.bidPrice}}</div>
     </div>
