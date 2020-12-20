@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {passwordValidator} from '../validators/password.validator';
 import {EditUserService} from '../../service/edit-user.service';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-password-change-form',
@@ -34,8 +35,8 @@ export class PasswordChangeFormComponent implements OnInit {
         token: this.token,
         newPassword: this.passwordForm.value.password
       };
-      this.editUserService.executePasswordChange(changePasswordCommand).subscribe(
-        () => this.router.navigateByUrl('/'));
+      this.editUserService.executePasswordChange(changePasswordCommand)
+        .pipe(tap(() => this.router.navigateByUrl('/'))).subscribe();
     }
   }
 

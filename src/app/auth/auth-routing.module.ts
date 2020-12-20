@@ -48,7 +48,7 @@ const routes: Routes = [
     component: RegistrationPageComponent
   },
   {
-    path: 'password-change-form/:token',
+    path: 'password-change/:token',
     component: PasswordChangeFormComponent
   }
 ];

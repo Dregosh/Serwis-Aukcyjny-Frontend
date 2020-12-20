@@ -3,7 +3,7 @@ import {EditUserService} from '../service/edit-user.service';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {EditUserDTO} from '../model/editUserDTO';
 import {AuthenticationService} from '../../shared/services/authentication.service';
-import {switchMap} from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
 import {UserExist} from '../registration-page/model/userExist';
 import {Router} from '@angular/router';
 import {identEmailsValidator} from './validators/ident-emails.validator';
@@ -69,12 +69,11 @@ export class EditUserComponent implements OnInit {
   onSubmit(): void {
     if (this.editionForm.valid) {
       this.editUserService.updateUserInsensitiveData(this.editionForm.value)
-        .subscribe(() => {
-          this.savedDataInfo = 'Zmiany zostały zapisane';
-          setTimeout(() => {
+        .pipe(
+          tap(() => this.savedDataInfo = 'Zmiany zostały zapisane'),
+          tap(() => setTimeout(() => {
             this.router.navigate(['my-account']);
-            }, 1000);
-        });
+          }, 1000))).subscribe();
     }
   }
 
@@ -82,24 +81,24 @@ export class EditUserComponent implements OnInit {
     if (this.emailChangeForm.valid) {
       this.authenticationService
         .userExist(this.loggedUser.displayName, this.emailChangeForm.value.newEmail)
-        .pipe(switchMap((userExist: UserExist) => {
+        .pipe(
+          switchMap((userExist: UserExist) => {
             if (userExist.emailExist) {
               this.errorMessage = 'Istnieje już konto z takim adresem e-mail';
               throw new Error('User exist');
             } else {
-              const updateEmailRequestCommand = {
-                oldEmail: this.loggedUser.email,
-                newEmail: this.emailChangeForm.value.newEmail
-              };
+              const updateEmailRequestCommand = {newEmail: this.emailChangeForm.value.newEmail};
               return this.editUserService.updateUserEmail(updateEmailRequestCommand);
             }
           }),
-          switchMap(() => this.router.navigate(['auth/email-change-request-confirm']))).subscribe();
+          switchMap(() => this.router.navigate(['auth/email-change-request-confirm'])))
+        .subscribe();
     }
   }
 
   onPasswordChange(): void {
-    this.editUserService.changePasswordRequest().subscribe(() => this.changePasswordRequested = true);
+    this.editUserService.changePasswordRequest()
+      .pipe(tap(() => this.changePasswordRequested = true)).subscribe();
   }
 
   get newEmail(): AbstractControl {
