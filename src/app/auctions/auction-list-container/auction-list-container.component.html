@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <ng-container  *ngIf="auctions$ | async as auctions; else loading">
+        <ng-container *ngIf="auctions.content.length > 0; else empty">
+          <app-auction-list [auctions]="auctions.content"></app-auction-list>
+        </ng-container>
+        <ng-template #empty>
+          <h1>Niestety nie ma jeszcze aukcji w podanej kategorii</h1>
+        </ng-template>
+      </ng-container>
+      <mat-paginator
+        [length]="total"
+        (page)="getAuctions(paginator.pageIndex, paginator.pageSize)"
+        [pageSizeOptions]="[5, 10, 25, 100]">
+      </mat-paginator>
+    </div>
+    <div class="col-md-2">
+      <app-auction-filter></app-auction-filter>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="d-flex justify-content-center">
+    <div class="spinner-grow  vertical-center" style="width: 5rem; height: 5rem;" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</ng-template>
+
+

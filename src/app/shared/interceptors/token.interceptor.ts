@@ -4,7 +4,7 @@ import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {TokenStore} from '../services/token.store';
 import {environment} from '../../../environments/environment';
 import {AuthenticationService} from '../services/authentication.service';
-import {catchError, filter, finalize, switchMap, take} from 'rxjs/operators';
+import {catchError, filter, finalize, switchMap, take, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -40,11 +40,8 @@ export class TokenInterceptor implements HttpInterceptor {
 
           return this.authenticationService.refreshToken()
             .pipe(
-              switchMap((tokenResponse) => {
-                this.isRefreshingToken = false;
-                this.tokenSubject.next(tokenResponse.access_token);
-                return next.handle(this.applyToken(req));
-              }),
+              tap((tokenResponse) => this.tokenSubject.next(tokenResponse.access_token)),
+              switchMap((tokenResponse) =>  next.handle(this.applyToken(req))),
               finalize(() => this.isRefreshingToken = false));
         }
       }));

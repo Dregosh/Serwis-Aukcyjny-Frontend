@@ -10,6 +10,11 @@ import {MatIconModule} from '@angular/material/icon';
 import {AuctionBeltComponent} from '../shared/auction-belt/auction-belt.component';
 import {SingleAuctionCardComponent} from '../shared/single-auction-card/single-auction-card.component';
 import {FlexModule} from '@angular/flex-layout';
+import {AuctionListContainerComponent} from './auction-list-container/auction-list-container.component';
+import { AuctionListComponent } from './auction-list/auction-list.component';
+import { AuctionFilterComponent } from './auction-filter/auction-filter.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { SingleAuctionOnListComponent } from './single-auction-on-list/single-auction-on-list.component';
 
 
 
@@ -20,14 +25,19 @@ import {FlexModule} from '@angular/flex-layout';
     CategoriesComponent,
     AuctionBeltComponent,
     SingleAuctionCardComponent,
+    AuctionListContainerComponent,
+    AuctionListComponent,
+    AuctionFilterComponent,
+    SingleAuctionOnListComponent,
   ],
-    imports: [
-        CommonModule,
-        AuctionsRoutingModule,
-        MatListModule,
-        MatCardModule,
-        MatIconModule,
-        FlexModule
-    ]
+  imports: [
+    CommonModule,
+    AuctionsRoutingModule,
+    MatListModule,
+    MatCardModule,
+    MatIconModule,
+    FlexModule,
+    MatPaginatorModule
+  ]
 })
 export class AuctionsModule { }

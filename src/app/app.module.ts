@@ -14,6 +14,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {AuctionsModule} from './auctions/auctions.module';
 import {AuthModule} from './auth/auth.module';
 import {TokenInterceptor} from './shared/interceptors/token.interceptor';
+import { AuctionListContainerComponent } from './auctions/auction-list-container/auction-list-container.component';
 
 @NgModule({
   declarations: [
