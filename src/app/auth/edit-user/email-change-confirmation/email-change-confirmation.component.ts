@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthenticationService} from '../../shared/services/authentication.service';
-import {ActivatedRoute} from '@angular/router';
+import {AuthenticationService} from '../../../shared/services/authentication.service';
+import {ActivatedRoute, Router} from '@angular/router';
 import {catchError, tap} from 'rxjs/operators';
 
 @Component({
@@ -14,7 +14,8 @@ export class EmailChangeConfirmationComponent implements OnInit {
   isConfirmed = false;
 
   constructor(private authenticationService: AuthenticationService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
     const token = this.route.snapshot.paramMap.get('token');
@@ -31,5 +32,9 @@ export class EmailChangeConfirmationComponent implements OnInit {
             throw err;
           })).subscribe();
     }
+  }
+
+  onClick(): void {
+    this.router.navigateByUrl('/');
   }
 }

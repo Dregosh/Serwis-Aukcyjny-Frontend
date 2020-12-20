@@ -77,7 +77,7 @@ export class AuthenticationService {
     this.http.post(`${this.authUrl}auth/logout`, null)
       .pipe(
         tap(() => this.tokenStore.clearTokens()),
-        switchMap(() => this.router.navigate(['dashboard'])))
+        switchMap(() => this.router.navigateByUrl('/dashboard')))
       .subscribe();
   }
 
@@ -99,7 +99,6 @@ export class AuthenticationService {
   }
 
   public confirmEmailChange(token: string): Observable<any> {
-    return this.http.post(`${this.authUrl}edit-user/update-email-confirmation`,
-      {token});
+    return this.http.post(`${this.authUrl}auth/update-email-confirmation`, {token});
   }
 }

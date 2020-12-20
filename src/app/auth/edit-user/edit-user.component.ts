@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EditUserService} from '../service/edit-user.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {UpdateEmailRequestCommandDTO} from '../model/updateEmailRequestCommandDTO';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {EditUserDTO} from '../model/editUserDTO';
+import {AuthenticationService} from '../../shared/services/authentication.service';
+import {switchMap, tap} from 'rxjs/operators';
+import {UserExist} from '../registration-page/model/userExist';
+import {Router} from '@angular/router';
+import {identEmailsValidator} from './validators/ident-emails.validator';
 
 @Component({
   selector: 'app-edit-user',
@@ -13,30 +17,35 @@ export class EditUserComponent implements OnInit {
   loggedUser: EditUserDTO;
   editionForm: FormGroup;
   emailChangeForm: FormGroup;
-  initiatedEmailChange = false;
+  savedDataInfo = '';
+  errorMessage: string;
+  changePasswordRequested = false;
 
   constructor(private editUserService: EditUserService,
-              private fb: FormBuilder) { }
+              private authenticationService: AuthenticationService,
+              private fb: FormBuilder,
+              private router: Router) {
+  }
 
   ngOnInit(): void {
     this.editionForm = this.fb.group({
       email: [''],
       displayName: [''],
-      firstName: [''],
-      lastName: [''],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       address: this.fb.group({
-        city: [''],
-        street: [''],
-        number: [''],
-        postal: ['']
+        city: ['', Validators.required],
+        street: ['', Validators.required],
+        number: ['', Validators.required],
+        postal: ['', Validators.required]
       })
     });
 
     this.emailChangeForm = this.fb.group({
       oldEmail: [''],
-      newEmail: [''],
-      confirmNewEmail: ['']
-    });
+      newEmail: ['', [Validators.required, Validators.email]],
+      confirmNewEmail: ['', [Validators.required, Validators.email]]
+    }, {validator: identEmailsValidator});
 
     this.editUserService.getLoggedUserData().subscribe(
       editUserDto => {
@@ -58,23 +67,69 @@ export class EditUserComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.editUserService.updateUserInsensitiveData(this.editionForm.value)
-      .subscribe();
+    if (this.editionForm.valid) {
+      this.editUserService.updateUserInsensitiveData(this.editionForm.value)
+        .pipe(
+          tap(() => this.savedDataInfo = 'Zmiany zostały zapisane'),
+          tap(() => setTimeout(() => {
+            this.router.navigate(['my-account']);
+          }, 1000))).subscribe();
+    }
   }
 
   onSubmitEmailChange(): void {
-    const command: UpdateEmailRequestCommandDTO =
-      new UpdateEmailRequestCommandDTO(
-        this.loggedUser.email,
-        this.emailChangeForm.value.newEmail);
-    this.editUserService.updateUserEmail(command).subscribe(
-      () => {
-        this.initiatedEmailChange = true;
-      }
-    );
+    if (this.emailChangeForm.valid) {
+      this.authenticationService
+        .userExist(this.loggedUser.displayName, this.emailChangeForm.value.newEmail)
+        .pipe(
+          switchMap((userExist: UserExist) => {
+            if (userExist.emailExist) {
+              this.errorMessage = 'Istnieje już konto z takim adresem e-mail';
+              throw new Error('User exist');
+            } else {
+              const updateEmailRequestCommand = {newEmail: this.emailChangeForm.value.newEmail};
+              return this.editUserService.updateUserEmail(updateEmailRequestCommand);
+            }
+          }),
+          switchMap(() => this.router.navigate(['auth/email-change-request-confirm'])))
+        .subscribe();
+    }
   }
 
   onPasswordChange(): void {
+    this.editUserService.changePasswordRequest()
+      .pipe(tap(() => this.changePasswordRequested = true)).subscribe();
+  }
 
+  get newEmail(): AbstractControl {
+    return this.emailChangeForm.get('newEmail');
+  }
+
+  get confirmNewEmail(): AbstractControl {
+    return this.emailChangeForm.get('confirmNewEmail');
+  }
+
+  get firstName(): AbstractControl {
+    return this.editionForm.get('firstName');
+  }
+
+  get lastName(): AbstractControl {
+    return this.editionForm.get('lastName');
+  }
+
+  get city(): AbstractControl {
+    return this.editionForm.get('address').get('city');
+  }
+
+  get street(): AbstractControl {
+    return this.editionForm.get('address').get('street');
+  }
+
+  get number(): AbstractControl {
+    return this.editionForm.get('address').get('number');
+  }
+
+  get postal(): AbstractControl {
+    return this.editionForm.get('address').get('postal');
   }
 }
