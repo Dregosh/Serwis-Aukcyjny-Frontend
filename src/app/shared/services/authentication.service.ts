@@ -3,9 +3,9 @@ import {TokenStore} from './token.store';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {TokenResponse} from '../model/token-response';
-import {switchMap, tap} from 'rxjs/operators';
+import {catchError, switchMap, tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {UserExist} from '../../auth/registration-page/model/userExist';
 import {Register} from '../../auth/registration-page/model/register';
 
@@ -65,7 +65,12 @@ export class AuthenticationService {
         refresh_token: this.tokenStore.getRefreshToken()
       }
     });
-    return this.http.post<TokenResponse>(this.keycloakUrl, params, httpOptions);
+    return this.http.post<TokenResponse>(this.keycloakUrl, params, httpOptions)
+      .pipe(tap((tokenResponse) => this.tokenStore.setTokens(tokenResponse.access_token, tokenResponse.refresh_token)),
+        catchError((err) => {
+          this.tokenStore.clearTokens();
+          throw new Error(err);
+        }));
   }
 
   public logout(): void {

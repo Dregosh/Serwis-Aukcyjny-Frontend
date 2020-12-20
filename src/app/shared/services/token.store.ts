@@ -21,7 +21,7 @@ export class TokenStore {
   }
 
   public getToken(): string {
-    return sessionStorage.getItem(this.TOKEN);
+    return localStorage.getItem(this.TOKEN);
   }
 
   public getRefreshToken(): string {
@@ -29,18 +29,19 @@ export class TokenStore {
   }
 
   public clearTokens(): void {
-    sessionStorage.removeItem(this.TOKEN);
+    localStorage.removeItem(this.TOKEN);
     localStorage.removeItem(this.REFRESH_TOKEN);
   }
 
   public setTokens(token: string, refreshToken: string): void {
-    sessionStorage.setItem(this.TOKEN, token);
+    localStorage.setItem(this.TOKEN, token);
     localStorage.setItem(this.REFRESH_TOKEN, refreshToken);
     this.init();
   }
 
   public setToken(token: string): void {
     localStorage.setItem(this.TOKEN, token);
+    this.init();
   }
 
   public isEmailVerified(): boolean {
@@ -50,4 +51,9 @@ export class TokenStore {
   public getUsername(): string {
     return this.decoder.decodeToken(this.getToken()).preferred_username;
   }
+
+  public isExpired(): boolean {
+    return this.decoder.isTokenExpired();
+  }
 }
+
