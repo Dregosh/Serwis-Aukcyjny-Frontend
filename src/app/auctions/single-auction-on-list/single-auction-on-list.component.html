@@ -1,0 +1,14 @@
+<div class="container m-1" (click)="goToAuction()">
+  <div class="row align-items-center">
+    <div class="col-md-4">
+      <img [src]="photoUrl + auction.mainPhotoName" alt="Auction image" *ngIf="auction.mainPhotoName">
+      <img src="/assets/no-photo-big.jpg" alt="Auction image" *ngIf="!auction.mainPhotoName">
+    </div>
+    <div class="col-md-4">
+      <h3>{{auction.title}}</h3>
+      <div *ngIf="!auction.alreadyBidded">Kup Teraz: {{auction.buyNowPrice}}</div>
+      <div>Licytuj: {{auction.bidPrice}}</div>
+    </div>
+  </div>
+
+</div>

@@ -1,8 +1,8 @@
 import {RouterModule, Routes} from '@angular/router';
 import {MainDashboardComponent} from './main-dashboard/main-dashboard.component';
-import {EditUserComponent} from '../auth/edit-user/edit-user.component';
 import {NgModule} from '@angular/core';
 import {MainCompomentComponent} from './main-compoment/main-compoment.component';
+import {AuctionListContainerComponent} from './auction-list-container/auction-list-container.component';
 
 const routes: Routes = [
   {
@@ -18,6 +18,10 @@ const routes: Routes = [
         path: 'dashboard',
         component: MainDashboardComponent
       },
+      {
+        path: 'categories/:categoryId',
+        component: AuctionListContainerComponent
+      }
     ]
   },
 ];

@@ -1,0 +1,10 @@
+.premium {
+  border: yellow;
+}
+.container {
+  cursor: pointer;
+}
+img {
+  max-width: 190px;
+  max-height: 190px;
+}

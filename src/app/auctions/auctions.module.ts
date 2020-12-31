@@ -10,6 +10,16 @@ import {MatIconModule} from '@angular/material/icon';
 import {AuctionBeltComponent} from '../shared/auction-belt/auction-belt.component';
 import {SingleAuctionCardComponent} from '../shared/single-auction-card/single-auction-card.component';
 import {FlexModule} from '@angular/flex-layout';
+import {AuctionListContainerComponent} from './auction-list-container/auction-list-container.component';
+import { AuctionListComponent } from './auction-list/auction-list.component';
+import { AuctionFilterComponent } from './auction-filter/auction-filter.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { SingleAuctionOnListComponent } from './single-auction-on-list/single-auction-on-list.component';
+import {MatSelectModule} from '@angular/material/select';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 
@@ -20,6 +30,10 @@ import {FlexModule} from '@angular/flex-layout';
     CategoriesComponent,
     AuctionBeltComponent,
     SingleAuctionCardComponent,
+    AuctionListContainerComponent,
+    AuctionListComponent,
+    AuctionFilterComponent,
+    SingleAuctionOnListComponent,
   ],
     imports: [
         CommonModule,
@@ -27,7 +41,14 @@ import {FlexModule} from '@angular/flex-layout';
         MatListModule,
         MatCardModule,
         MatIconModule,
-        FlexModule
+        FlexModule,
+        MatPaginatorModule,
+        MatSelectModule,
+        FormsModule,
+        MatInputModule,
+        MatCheckboxModule,
+        ReactiveFormsModule,
+        MatFormFieldModule
     ]
 })
 export class AuctionsModule { }
