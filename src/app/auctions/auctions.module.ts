@@ -15,6 +15,11 @@ import { AuctionListComponent } from './auction-list/auction-list.component';
 import { AuctionFilterComponent } from './auction-filter/auction-filter.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { SingleAuctionOnListComponent } from './single-auction-on-list/single-auction-on-list.component';
+import {MatSelectModule} from '@angular/material/select';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 
@@ -30,14 +35,20 @@ import { SingleAuctionOnListComponent } from './single-auction-on-list/single-au
     AuctionFilterComponent,
     SingleAuctionOnListComponent,
   ],
-  imports: [
-    CommonModule,
-    AuctionsRoutingModule,
-    MatListModule,
-    MatCardModule,
-    MatIconModule,
-    FlexModule,
-    MatPaginatorModule
-  ]
+    imports: [
+        CommonModule,
+        AuctionsRoutingModule,
+        MatListModule,
+        MatCardModule,
+        MatIconModule,
+        FlexModule,
+        MatPaginatorModule,
+        MatSelectModule,
+        FormsModule,
+        MatInputModule,
+        MatCheckboxModule,
+        ReactiveFormsModule,
+        MatFormFieldModule
+    ]
 })
 export class AuctionsModule { }

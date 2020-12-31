@@ -6,7 +6,7 @@ import {AuctionService} from '../../shared/services/auction.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuctionFilter} from '../../shared/model/AuctionFilter';
 import {AuctionSort} from '../../shared/model/AuctionSort';
-import {switchMap, tap} from 'rxjs/operators';
+import {tap} from 'rxjs/operators';
 import {Page} from '../../shared/model/page';
 
 @Component({
@@ -33,12 +33,12 @@ export class AuctionListContainerComponent implements OnInit, AfterViewInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
-    this.getAuctions(0, 10);
+    this.getAuctions(0, 5);
   }
 
   ngAfterViewInit(): void {
     this.paginator.pageIndex = 0;
-    this.paginator.pageSize = 10;
+    this.paginator.pageSize = 5;
   }
 
   public getAuctions(page: number, size: number): void {
@@ -50,4 +50,17 @@ export class AuctionListContainerComponent implements OnInit, AfterViewInit {
       }));
   }
 
+  public changeSortType(sortType: AuctionSort): void {
+    this.sortType = sortType;
+    this.paginator.pageIndex = 0;
+    this.paginator.pageSize = 5;
+    this.getAuctions(0, 5);
+  }
+
+  public filterAuctions(filterMap: Map<AuctionFilter, any>): void {
+    this.paginator.pageIndex = 0;
+    this.paginator.pageSize = 10;
+    this.filterMap = filterMap;
+    this.getAuctions(0, 5);
+}
 }

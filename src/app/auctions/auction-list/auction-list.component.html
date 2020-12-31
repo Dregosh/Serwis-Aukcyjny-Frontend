@@ -1,4 +1,13 @@
 <mat-card class="mt-3 p-0">
+  <mat-card-header >
+    <mat-form-field class="mt-3">
+      <mat-select placeholder="Sortowanie" #sortValue (selectionChange)="emitSortChange($event.value)" [value]="currentSort">
+        <mat-option *ngFor="let sort of sorts" [value]="sort.sort">
+          {{sort.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card-header>
   <mat-card-content class="justify-content-center">
     <div *ngFor="let auction of auctions">
       <app-single-auction-on-list [auction]="auction"></app-single-auction-on-list>

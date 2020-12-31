@@ -1,9 +1,9 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-10">
+  <div class="row justify-content-around">
+    <div class="col-md-8">
       <ng-container  *ngIf="auctions$ | async as auctions; else loading">
         <ng-container *ngIf="auctions.content.length > 0; else empty">
-          <app-auction-list [auctions]="auctions.content"></app-auction-list>
+          <app-auction-list [auctions]="auctions.content" [currentSort]="sortType" (sortChange)="changeSortType($event)"></app-auction-list>
         </ng-container>
         <ng-template #empty>
           <h1>Niestety nie ma jeszcze aukcji w podanej kategorii</h1>
@@ -15,8 +15,8 @@
         [pageSizeOptions]="[5, 10, 25, 100]">
       </mat-paginator>
     </div>
-    <div class="col-md-2">
-      <app-auction-filter></app-auction-filter>
+    <div class="col-md-3">
+      <app-auction-filter (filterFormChangeEmitter)="filterAuctions($event)"></app-auction-filter>
     </div>
   </div>
 </div>

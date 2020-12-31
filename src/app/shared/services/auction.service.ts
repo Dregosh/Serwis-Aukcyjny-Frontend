@@ -20,7 +20,7 @@ export class AuctionService {
   public getAuctions(categoryId: number, page: number, size: number,
                      filterMap: Map<AuctionFilter, any>, sort: AuctionSort = AuctionSort.ID_DESC): Observable<Page<SimpleAuction>> {
     let param = new HttpParams().append('page', String(page)).append('size', String(size)).append('sort', sort);
-    filterMap.forEach((value, key) => param = param.append(value, String(key)));
+    filterMap.forEach((value, key) => param = param.append(key, String(value)));
     return this.http.get<Page<SimpleAuction>>(`${this.apiUrl}auctions/byCategory/${categoryId}`, {params: param});
   }
 }

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {FilterForm} from '../model/FilterForm';
+import {AuctionFilter} from '../../shared/model/AuctionFilter';
 
 @Component({
   selector: 'app-auction-filter',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./auction-filter.component.css']
 })
 export class AuctionFilterComponent implements OnInit {
+  filterForm = new FilterForm();
 
-  constructor() { }
+  @Output() filterFormChangeEmitter = new EventEmitter<Map<AuctionFilter, any>>();
+
+  constructor() {
+  }
 
   ngOnInit(): void {
+  }
+
+  public onFilter(): void {
+    this.filterFormChangeEmitter.emit(this.filterForm.toAuctionFilterMap());
   }
 
 }
