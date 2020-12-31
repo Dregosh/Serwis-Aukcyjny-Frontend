@@ -25,16 +25,16 @@ export class FilterForm extends FormGroup {
     if (this.value.onlyPromoted) {
       map = map.set(AuctionFilter.ONLY_PROMOTED, this.value.onlyPromoted);
     }
-    if (this.controls.bidPriceFrom.valid) {
+    if (this.value.bidPriceFrom && this.controls.bidPriceFrom.valid) {
       map = map.set(AuctionFilter.BID_PRICE_FROM, this.value.bidPriceFrom);
     }
-    if (this.controls.bidPriceTo.valid) {
+    if (this.value.bidPriceTo && this.controls.bidPriceTo.valid) {
       map = map.set(AuctionFilter.BID_PRICE_TO, this.value.bidPriceTo);
     }
-    if (this.controls.buyNowPriceFrom.valid) {
+    if (this.value.buyNowPriceFrom && this.controls.buyNowPriceFrom.valid) {
       map = map.set(AuctionFilter.BUY_NOW_PRICE_FROM, this.value.buyNowPriceFrom);
     }
-    if (this.controls.buyNowPriceTo.valid) {
+    if (this.value.buyNowPriceTo && this.controls.buyNowPriceTo.valid) {
       map = map.set(AuctionFilter.BUY_NOW_PRICE_TO, this.value.buyNowPriceTo);
     }
     return map;
