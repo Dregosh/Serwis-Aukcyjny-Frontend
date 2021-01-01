@@ -1,0 +1,27 @@
+.main-image {
+  height: 500px;
+  min-height: 300px;
+  width: 420px;
+}
+
+.main-image img {
+  min-width: 400px;
+  min-height: 300px;
+  width: 400px;
+  height: 400px;
+}
+
+.mini-image {
+  width: 400px;
+}
+
+.mini-image img{
+  cursor: pointer;
+  height: 100px;
+  width: 100px;
+  min-height: 100px;
+  min-width: 100px;
+  border: 1px black;
+}
+
+

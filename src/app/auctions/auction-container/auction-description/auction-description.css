@@ -1,0 +1,26 @@
+.title {
+  font-size: 50px;
+  margin-bottom: 25px;
+}
+.seller {
+  font-size: 25px;
+  margin-bottom: 35px;
+}
+
+.price {
+  font-size: 25px;
+  margin-bottom: 35px;
+}
+
+.description {
+  font-size: 15px;
+  margin-bottom: 25px;
+}
+
+.actions {
+  margin-bottom: 25px;
+}
+
+.ended {
+  margin-bottom: 25px;
+}

@@ -1,4 +1,4 @@
-<mat-card [routerLink]="'auction/' + this.auction.id">
+<mat-card (click)="goToAuction()">
   <div class="row justify-content-center">
     <mat-card-title>{{auction.title}}</mat-card-title>
   </div>

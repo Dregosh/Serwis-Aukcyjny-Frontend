@@ -20,6 +20,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { AuctionContainerComponent } from './auction-container/auction-container.component';
+import {AuctionDetailsComponent} from './auction-container/auction-details/product-details.component';
+import {AuctionDescriptionComponent} from './auction-container/auction-description/auction-description.component';
+import {AuctionImagesComponent} from './auction-container/auction-images/auction-images.component';
+import { AuctionActionsComponent } from './auction-container/auction-actions/auction-actions.component';
+import { AuctionEndedComponent } from './auction-container/auction-ended/auction-ended.component';
 
 
 
@@ -34,6 +40,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     AuctionListComponent,
     AuctionFilterComponent,
     SingleAuctionOnListComponent,
+    AuctionContainerComponent,
+    AuctionDetailsComponent,
+    AuctionDescriptionComponent,
+    AuctionImagesComponent,
+    AuctionActionsComponent,
+    AuctionEndedComponent
   ],
     imports: [
         CommonModule,

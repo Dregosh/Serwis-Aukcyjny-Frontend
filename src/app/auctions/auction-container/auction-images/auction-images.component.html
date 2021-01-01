@@ -1,0 +1,9 @@
+<div class="row main-image ml-3">
+  <img *ngIf="selectedImage" [src]="getImageUrl(selectedImage)" alt="product image">
+  <img src="/assets/no-photo-big.jpg" alt="Auction image" *ngIf="!selectedImage">
+</div>
+<div class="row mt-1 justify-content-between mini-image ml-3" *ngIf="images.length > 1">
+  <ng-container *ngFor="let image of images">
+    <img (click)="selectImage(image)" [src]="getImageUrl(image)" alt="mini-image">
+  </ng-container>
+</div>

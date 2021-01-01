@@ -1,0 +1,26 @@
+<div class="container">
+  <ng-container *ngIf="authenticationService.isLogged(); else login">
+    <div class="row" *ngIf="auction.canBid">
+      <form [formGroup]="bidForm">
+        <div class="row">
+          <mat-form-field>
+            <input matInput type="number" formControlName="bidPrice" placeholder="Licytuj">
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <button class="btn btn-info" [disabled]="bidForm.invalid" (click)="bid()">
+            Licytuj
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="row" *ngIf="auction.canBuyNow">
+      <button class="btn btn-info" (click)="buyNow()">
+        Kup Teraz
+      </button>
+    </div>
+  </ng-container>
+  <ng-template #login>
+    Zaloguj się aby móc licytować.
+  </ng-template>
+</div>
