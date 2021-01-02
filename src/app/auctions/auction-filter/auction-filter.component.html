@@ -30,9 +30,11 @@
           <input matInput type="number" placeholder="Cena licytacji do" formControlName="bidPriceTo" id="bidPriceTo">
         </label>
       </mat-form-field>
-      <button class="btn-info" (click)="onFilter()" [disabled]="!filterForm.valid">
-        Filtruj
-      </button>
+      <div class="row justify-content-center">
+        <button class="btn btn-info" (click)="onFilter()" [disabled]="!filterForm.valid">
+          Filtruj
+        </button>
+      </div>
     </form>
   </mat-card-content>
 </mat-card>

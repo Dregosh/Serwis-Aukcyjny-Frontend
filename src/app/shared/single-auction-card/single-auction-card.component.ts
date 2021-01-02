@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {SimpleAuction} from '../model/simpleAuction';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-single-auction-card',
@@ -13,9 +14,12 @@ export class SingleAuctionCardComponent implements OnInit {
   photoUrl = environment.photoUrl;
 
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  goToAuction(): void {
+    this.router.navigateByUrl(`auctions/${this.auction.id}`);
+  }
 }

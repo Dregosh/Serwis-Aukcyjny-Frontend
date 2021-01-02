@@ -1,0 +1,3 @@
+<div *ngIf="auction$ | async as auction">
+  <app-auction-details [auction]="auction" (refreshEmitter)="refreshAuction()"></app-auction-details>
+</div>

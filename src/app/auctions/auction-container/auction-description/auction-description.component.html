@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row justify-content-start title">
+    {{auction.title}}
+  </div>
+  <div class="row justify-content-start seller">
+    od: {{auction.sellerDisplayName}}
+  </div>
+  <div class="row justify-content-start price">
+    <div *ngIf="auction.canBid">
+      Aktualna licytacja: {{auction.maxBid}} zł
+    </div>
+    <div *ngIf=auction.canBuyNow>
+      Kup teraz: {{auction.buyNowPrice}} zł
+    </div>
+  </div>
+  <div class="row justify-content-start description">
+    {{auction.description}}
+  </div>
+  <div class="row justify-content-start actions" *ngIf=canDoAnyAction>
+    <app-auction-actions [auction]="auction" (refreshEmitter)="refreshEmitter.emit(true)"></app-auction-actions>
+  </div>
+  <div class="row justify-content-start ended" *ngIf="isEnded">
+    <app-auction-ended></app-auction-ended>
+  </div>
+</div>
