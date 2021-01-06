@@ -50,7 +50,7 @@ import {UserAuctionsContainerComponent} from './user-auctions-container/user-auc
     AuctionActionsComponent,
     AuctionEndedComponent,
     CreateAuctionComponent,
-    AuctionComponentComponent
+    AuctionComponentComponent,
     UserAuctionsContainerComponent
   ],
   imports: [
