@@ -27,7 +27,6 @@ export class UserAuctionsContainerComponent implements OnInit, AfterViewInit {
   constructor(private auctionService: AuctionService,
               private route: ActivatedRoute,
               private router: Router) {
-    // this.categoryId = Number(this.route.snapshot.paramMap.get('categoryId'));
   }
 
   ngOnInit(): void {
