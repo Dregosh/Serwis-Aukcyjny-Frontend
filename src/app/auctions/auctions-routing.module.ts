@@ -6,6 +6,7 @@ import {AuctionContainerComponent} from './auction-container/auction-container.c
 import {CreateAuctionComponent} from './create-auction/create-auction.component';
 import {AuctionComponentComponent} from './auction-component/auction-component.component';
 import {MainCompomentComponent} from './main-compoment/main-compoment.component';
+import {UserAuctionsContainerComponent} from './user-auctions-container/user-auctions-container.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: 'user-auctions',
+    component: UserAuctionsContainerComponent
+  }
 ];
 
 @NgModule({

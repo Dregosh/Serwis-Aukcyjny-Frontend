@@ -31,6 +31,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MaterialFileInputModule} from 'ngx-material-file-input';
 import {SharedModule} from '../shared/shared.module';
 import { AuctionComponentComponent } from './auction-component/auction-component.component';
+import {UserAuctionsContainerComponent} from './user-auctions-container/user-auctions-container.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { AuctionComponentComponent } from './auction-component/auction-component
     AuctionActionsComponent,
     AuctionEndedComponent,
     CreateAuctionComponent,
-    AuctionComponentComponent
+    AuctionComponentComponent,
+    UserAuctionsContainerComponent
   ],
   imports: [
     CommonModule,

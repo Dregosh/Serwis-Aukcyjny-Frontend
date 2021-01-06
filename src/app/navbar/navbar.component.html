@@ -1,30 +1,36 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand margin-left" routerLink="/">
-    Serwis aukcyjny
-  </a>
+    <i class="fas fa-comments-dollar fa-lg mr-3"></i>Serwis Aukcyjny</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse"
           data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
           aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse flex-row-reverse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse navbar-dark flex-row-reverse" id="navbarSupportedContent">
     <ul class="navbar-nav my-2 my-lg-0">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/create-auction"
-           [hidden]="!authenticationService.isLogged()">Wystaw aukcje</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/auth/my-account"
-           [hidden]="!authenticationService.isLogged()">Moje konto</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link pointer" [hidden]="!authenticationService.isLogged()"
-           (click)="authenticationService.logout()">Wyloguj</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle pointer" id="navbarDropdown" data-toggle="dropdown"
+           [hidden]="!authenticationService.isLogged()">Twoje konto</a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" routerLink="/create-auction">Wystaw nową aukcję</a>
+          <a class="dropdown-item" routerLink="/user-auctions">Twoje aukcje</a>
+          <a class="dropdown-item" routerLink="/auth/my-account">Edycja danych użytkownika</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item pointer" (click)="authenticationService.logout()">Wyloguj</a>
+        </div>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/auth/login"
-           [hidden]="authenticationService.isLogged()">Zaloguj</a>
+           [hidden]="authenticationService.isLogged()">Zaloguj się</a>
+      </li>
+      <li class="nav-item ml-3">
+        <a class="nav-link" href="https://gitlab.com/azmijewski/serwis-aukcyjny-frontend" target="_blank"
+           title="Kod źródłowy frontendu (Angular)"><i class="fab fa-angular fa-lg"></i></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://gitlab.com/azmijewski/serwis-aukcyjny-backend" target="_blank"
+           title="Kod źródłowy backendu (Java SpringBoot)"><i class="fab fa-github fa-lg"></i></a>
       </li>
     </ul>
   </div>
