@@ -4,7 +4,8 @@ import {CreateAuction} from '../model/CreateAuction';
 import {AuctionService} from '../../shared/services/auction.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {FileValidator} from 'ngx-material-file-input';
-import {switchMap} from 'rxjs/operators';
+import {finalize, switchMap} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-auction',
@@ -17,7 +18,8 @@ export class CreateAuctionComponent implements OnInit {
   private addedImages: [];
 
   constructor(private auctionService: AuctionService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private router: Router) {
   }
 
   public ngOnInit(): void {
@@ -32,13 +34,9 @@ export class CreateAuctionComponent implements OnInit {
       categoryId: new FormControl('', Validators.required),
     });
   }
+
   public addAuction = () => this.auctionService.createAuction(this.auctionForm)
-    .pipe(switchMap((auctionId) => {
-      if (this.addedImages.length > 0) {
-        return this.auctionService.addImagesToAuction(this.addedImages, auctionId);
-      }
-      return of(auctionId);
-    }));
+    .pipe(switchMap((auctionId) => this.auctionService.addImagesToAuction(this.addedImages, auctionId)))
 
   selectFiles(event): void {
     this.addedImages = event.target.files;
