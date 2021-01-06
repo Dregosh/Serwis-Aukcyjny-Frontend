@@ -80,9 +80,7 @@
           </div>
         </div>
         <div class="row justify-content-center">
-          <button [disabled]="!registerForm.valid" type="submit" class="btn btn-dark" id="login-button"
-                  (click)="onSubmit()">Zarejestruj
-          </button>
+          <app-button [disabled]="!registerForm.valid" [action]="register()" text="Zarejestruj"></app-button>
         </div>
       </form>
     </div>
