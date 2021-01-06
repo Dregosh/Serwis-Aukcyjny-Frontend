@@ -29,6 +29,16 @@ export class AuctionService {
     return this.http.get<Auction>(`${this.apiUrl}auctions/${id}`);
   }
 
+  public getLoggedUserAuctions(page: number, size: number,
+                               filterMap: Map<AuctionFilter, any>,
+                               sort: AuctionSort = AuctionSort.ID_DESC)
+    : Observable<Page<SimpleAuction>> {
+    let param =
+      new HttpParams().append('page', String(page)).append('size', String(size)).append('sort', sort);
+    filterMap.forEach((value, key: AuctionFilter) => param = param.append(key, String(value)));
+    return this.http.get<Page<SimpleAuction>>(`${this.apiUrl}auctions/own-sorted`, {params: param});
+  }
+
   public bidAuction(id: number, bidPrice: number): Observable<any> {
     const body = {
       auctionId: id,

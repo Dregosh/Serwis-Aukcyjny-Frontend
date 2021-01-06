@@ -10,8 +10,8 @@ export interface Auction {
    maxBid: number;
    canBuyNow: boolean;
    canBid: boolean;
-   startDateTime: Date;
-   endDateTime: Date;
+   startDateTime: string;
+   endDateTime: string;
    status: AuctionStatus;
    observed: boolean;
    premium: boolean;

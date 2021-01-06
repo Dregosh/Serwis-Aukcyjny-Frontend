@@ -4,6 +4,7 @@ import {NgModule} from '@angular/core';
 import {MainCompomentComponent} from './main-compoment/main-compoment.component';
 import {AuctionListContainerComponent} from './auction-list-container/auction-list-container.component';
 import {AuctionContainerComponent} from './auction-container/auction-container.component';
+import {UserAuctionsContainerComponent} from './user-auctions-container/user-auctions-container.component';
 
 const routes: Routes = [
   {
@@ -26,9 +27,13 @@ const routes: Routes = [
       {
         path: 'auctions/:auctionId',
         component: AuctionContainerComponent
-      }
+      },
     ]
   },
+  {
+    path: 'user-auctions',
+    component: UserAuctionsContainerComponent
+  }
 ];
 
 @NgModule({
