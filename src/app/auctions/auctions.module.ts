@@ -7,7 +7,6 @@ import {CategoriesComponent} from './categories/categories.component';
 import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
-import {AuctionBeltComponent} from '../shared/auction-belt/auction-belt.component';
 import {SingleAuctionCardComponent} from '../shared/single-auction-card/single-auction-card.component';
 import {FlexModule} from '@angular/flex-layout';
 import {AuctionListContainerComponent} from './auction-list-container/auction-list-container.component';
@@ -26,6 +25,12 @@ import {AuctionDescriptionComponent} from './auction-container/auction-descripti
 import {AuctionImagesComponent} from './auction-container/auction-images/auction-images.component';
 import {AuctionActionsComponent} from './auction-container/auction-actions/auction-actions.component';
 import {AuctionEndedComponent} from './auction-container/auction-ended/auction-ended.component';
+import {CreateAuctionComponent} from './create-auction/create-auction.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MaterialFileInputModule} from 'ngx-material-file-input';
+import {SharedModule} from '../shared/shared.module';
+import { AuctionComponentComponent } from './auction-component/auction-component.component';
 import {UserAuctionsContainerComponent} from './user-auctions-container/user-auctions-container.component';
 
 
@@ -34,8 +39,6 @@ import {UserAuctionsContainerComponent} from './user-auctions-container/user-auc
     MainDashboardComponent,
     MainCompomentComponent,
     CategoriesComponent,
-    AuctionBeltComponent,
-    SingleAuctionCardComponent,
     AuctionListContainerComponent,
     AuctionListComponent,
     AuctionFilterComponent,
@@ -46,6 +49,8 @@ import {UserAuctionsContainerComponent} from './user-auctions-container/user-auc
     AuctionImagesComponent,
     AuctionActionsComponent,
     AuctionEndedComponent,
+    CreateAuctionComponent,
+    AuctionComponentComponent
     UserAuctionsContainerComponent
   ],
   imports: [
@@ -61,8 +66,11 @@ import {UserAuctionsContainerComponent} from './user-auctions-container/user-auc
     MatInputModule,
     MatCheckboxModule,
     ReactiveFormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MaterialFileInputModule,
+    SharedModule
   ]
 })
-export class AuctionsModule {
-}
+export class AuctionsModule { }
