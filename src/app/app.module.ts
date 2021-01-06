@@ -6,7 +6,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app-routing.module';
 import {ContentPageComponent} from './content-page/content-page.component';
-import {NavbarComponent} from './shared/navbar/navbar.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
@@ -14,7 +13,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {AuctionsModule} from './auctions/auctions.module';
 import {AuthModule} from './auth/auth.module';
 import {TokenInterceptor} from './shared/interceptors/token.interceptor';
-import { AuctionListContainerComponent } from './auctions/auction-list-container/auction-list-container.component';
+import {SharedModule} from './shared/shared.module';
+import {NavbarComponent} from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -33,12 +33,14 @@ import { AuctionListContainerComponent } from './auctions/auction-list-container
     MatIconModule,
     AuctionsModule,
     AuthModule,
+    SharedModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true
   }],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

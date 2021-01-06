@@ -1,0 +1,60 @@
+<div class="container mt-3 justify-content-center">
+  <mat-card>
+    <mat-card-title>
+      Wystaw aukcję
+    </mat-card-title>
+    <mat-card-content *ngIf="createAuctionData$ | async as createAuction">
+      <form [formGroup]="auctionForm">
+        <div class="row justify-content-center">
+          <mat-form-field>
+            <input matInput type="text" formControlName="title" placeholder="Tytuł">
+          </mat-form-field>
+        </div>
+        <div class="row  justify-content-center">
+          <mat-form-field>
+            <textarea matInput formControlName="description"></textarea>
+          </mat-form-field>
+        </div>
+        <div class="row  justify-content-center">
+          <mat-form-field appearance="fill">
+            <mat-label>Wybierz datę startu</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="startDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="row  justify-content-center">
+          <mat-form-field>
+            <input matInput type="number" formControlName="buyNowPrice" placeholder="Cena kup teraz">
+          </mat-form-field>
+        </div>
+        <div class="row justify-content-center">
+          <mat-form-field>
+            <input matInput type="number" formControlName="minPrice" placeholder="Cena minimalna">
+          </mat-form-field>
+        </div>
+        <div class="row justify-content-sm-center" *ngIf="createAuction.canCreatePromotedAuction">
+          <mat-checkbox formControlName="promoted">Akcja promowana</mat-checkbox>
+        </div>
+        <div class="row justify-content-center">
+          <mat-form-field>
+            <mat-select placeholder="Wybierz kategorię" formControlName="categoryId">
+              <mat-option *ngFor="let category of createAuction.categories"
+                          [value]="category.id">{{category.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="row justify-content-center">
+          <mat-form-field>
+            <ngx-mat-file-input placeholder="Kliknij, aby dodać zdjęcia" (change)="selectFiles($event)"
+                                multiple></ngx-mat-file-input>
+            <mat-icon matSuffix>folder</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="row justify-content-center">
+          <app-button [disabled]="auctionForm.invalid" [action]="addAuction()" text="Dodaj"></app-button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

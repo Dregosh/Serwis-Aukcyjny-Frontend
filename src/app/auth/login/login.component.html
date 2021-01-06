@@ -34,7 +34,11 @@
           </div>
         </div>
         <div class="row justify-content-center">
-          <button [disabled]="!loginForm.valid" type="submit" class="btn btn-dark" id="login-button" (click)="onSubmit()">Zaloguj</button>
+          <app-button [disabled]="!loginForm.valid" text="Zaloguj" [action]="login()"></app-button>
+<!--          <button [disabled]="!loginForm.valid || loginLoading" type="submit" class="btn btn-dark" id="login-button" (click)="onSubmit()">-->
+<!--            <span *ngIf="loginLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>-->
+<!--            Zaloguj-->
+<!--          </button>-->
         </div>
       </form>
       <div class="row justify-content-end margin-up margin-right">

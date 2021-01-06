@@ -17,9 +17,9 @@ export class RegistrationPageComponent implements OnInit {
               private authenticationService: AuthenticationService,
               private router: Router) {
   }
+
   registerForm: FormGroup;
   errorMessage: string;
-  loading = false;
 
 
   private static checkPassword(group: FormGroup): any {
@@ -43,23 +43,19 @@ export class RegistrationPageComponent implements OnInit {
     }, {validator: RegistrationPageComponent.checkPassword});
   }
 
-  public onSubmit(): void {
-    if (this.registerForm.valid) {
-      this.authenticationService.userExist(this.registerForm.value.displayName, this.registerForm.value.email)
-        .pipe(switchMap((userExist: UserExist) => {
-          if (userExist.emailExist) {
-            this.errorMessage = 'Podany email jest już zajęty';
-            throw new Error('User exist');
-          } else if (userExist.displayNameExist) {
-            this.errorMessage = 'Podana nazwa użytkownika jest już zajęta';
-            throw new Error('User exist');
-          } else {
-            return this.authenticationService.registerUser(this.mapForm());
-          }
-        }),
-          switchMap(() => this.router.navigate(['auth/registration-completed']))).subscribe();
-    }
-  }
+  public register = () => this.authenticationService.userExist(this.registerForm.value.displayName, this.registerForm.value.email)
+    .pipe(switchMap((userExist: UserExist) => {
+        if (userExist.emailExist) {
+          this.errorMessage = 'Podany email jest już zajęty';
+          throw new Error('User exist');
+        } else if (userExist.displayNameExist) {
+          this.errorMessage = 'Podana nazwa użytkownika jest już zajęta';
+          throw new Error('User exist');
+        } else {
+          return this.authenticationService.registerUser(this.mapForm());
+        }
+      }),
+      switchMap(() => this.router.navigate(['auth/registration-completed'])))
 
 
   private mapForm(): Register {
@@ -72,7 +68,6 @@ export class RegistrationPageComponent implements OnInit {
       },
       displayName: this.registerForm.value.displayName, email: this.registerForm.value.email, firstName: this.registerForm.value.firstName,
       lastName: this.registerForm.value.lastName, password: this.registerForm.value.password
-
     };
   }
 }
