@@ -2,13 +2,15 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {AuctionSort} from '../model/AuctionSort';
-import {Observable, of} from 'rxjs';
+import {forkJoin, from, merge, Observable, of} from 'rxjs';
 import {SimpleAuction} from '../model/simpleAuction';
 import {AuctionFilter} from '../model/AuctionFilter';
 import {Page} from '../model/page';
 import {Auction} from '../../auctions/model/Auction';
 import {CreateAuction} from '../../auctions/model/CreateAuction';
 import {FormGroup} from '@angular/forms';
+import {Router} from '@angular/router';
+import {finalize, switchMap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,7 @@ export class AuctionService {
 
   apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   public getAuctions(categoryId: number, page: number, size: number,
@@ -71,15 +73,17 @@ export class AuctionService {
   }
 
   public addImagesToAuction(images: File[], auctionId: number): Observable<any> {
+    const imageSubscribers = [];
     for (const image of images) {
-      this.addSingleImage(image, auctionId);
+      imageSubscribers.push(this.addSingleImage(image, auctionId));
     }
-    return of(true);
+    return forkJoin(imageSubscribers)
+      .pipe(switchMap(() => from(this.router.navigateByUrl(`auctions/${auctionId}`))));
   }
 
-  private addSingleImage(image: File, auctionId: number): void {
+  private addSingleImage(image: File, auctionId: number): Observable<any> {
     const form = new FormData();
     form.append('file', image);
-    this.http.post(`${this.apiUrl}auctions/${auctionId}/images`, form).subscribe();
+    return this.http.post(`${this.apiUrl}auctions/${auctionId}/images`, form);
   }
 }

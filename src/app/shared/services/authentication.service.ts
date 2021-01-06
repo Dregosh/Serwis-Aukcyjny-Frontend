@@ -43,7 +43,7 @@ export class AuthenticationService {
       .pipe(tap(tokenResponse => this.tokenStore.setTokens(tokenResponse.access_token, tokenResponse.refresh_token)),
         switchMap(() => {
           if (this.tokenStore.isEmailVerified()) {
-            return this.router.navigate([redirectUrl]);
+            return this.router.navigateByUrl(redirectUrl);
           }
           return this.router.navigate(['auth/not-verified']);
         }));
