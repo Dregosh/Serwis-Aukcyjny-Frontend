@@ -7,7 +7,6 @@ import {CategoriesComponent} from './categories/categories.component';
 import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
-import {SingleAuctionCardComponent} from '../shared/single-auction-card/single-auction-card.component';
 import {FlexModule} from '@angular/flex-layout';
 import {AuctionListContainerComponent} from './auction-list-container/auction-list-container.component';
 import {AuctionListComponent} from './auction-list/auction-list.component';
@@ -32,6 +31,8 @@ import {MaterialFileInputModule} from 'ngx-material-file-input';
 import {SharedModule} from '../shared/shared.module';
 import { AuctionComponentComponent } from './auction-component/auction-component.component';
 import {UserAuctionsContainerComponent} from './user-auctions-container/user-auctions-container.component';
+import { UserSingleAuctionOnListComponent } from './user-auctions-container/user-single-auction-on-list/user-single-auction-on-list.component';
+import { UserAuctionListComponent } from './user-auctions-container/user-auction-list/user-auction-list.component';
 
 
 @NgModule({
@@ -51,7 +52,9 @@ import {UserAuctionsContainerComponent} from './user-auctions-container/user-auc
     AuctionEndedComponent,
     CreateAuctionComponent,
     AuctionComponentComponent,
-    UserAuctionsContainerComponent
+    UserAuctionsContainerComponent,
+    UserSingleAuctionOnListComponent,
+    UserAuctionListComponent
   ],
   imports: [
     CommonModule,

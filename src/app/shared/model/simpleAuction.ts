@@ -5,4 +5,7 @@ export interface SimpleAuction {
   bidPrice: number;
   buyNowPrice: number;
   alreadyBidded: boolean;
+  biddersAmount: number;
+  startDateTime: Date;
+  endDateTime: Date;
 }
