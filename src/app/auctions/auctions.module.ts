@@ -33,6 +33,7 @@ import { AuctionComponentComponent } from './auction-component/auction-component
 import {UserAuctionsContainerComponent} from './user-auctions-container/user-auctions-container.component';
 import { UserSingleAuctionOnListComponent } from './user-auctions-container/user-single-auction-on-list/user-single-auction-on-list.component';
 import { UserAuctionListComponent } from './user-auctions-container/user-auction-list/user-auction-list.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 @NgModule({
@@ -56,24 +57,25 @@ import { UserAuctionListComponent } from './user-auctions-container/user-auction
     UserSingleAuctionOnListComponent,
     UserAuctionListComponent
   ],
-  imports: [
-    CommonModule,
-    AuctionsRoutingModule,
-    MatListModule,
-    MatCardModule,
-    MatIconModule,
-    FlexModule,
-    MatPaginatorModule,
-    MatSelectModule,
-    FormsModule,
-    MatInputModule,
-    MatCheckboxModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MaterialFileInputModule,
-    SharedModule
-  ]
+    imports: [
+        CommonModule,
+        AuctionsRoutingModule,
+        MatListModule,
+        MatCardModule,
+        MatIconModule,
+        FlexModule,
+        MatPaginatorModule,
+        MatSelectModule,
+        FormsModule,
+        MatInputModule,
+        MatCheckboxModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MaterialFileInputModule,
+        SharedModule,
+        MatRadioModule
+    ]
 })
 export class AuctionsModule { }

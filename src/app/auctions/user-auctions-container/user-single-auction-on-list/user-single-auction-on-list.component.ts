@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {environment} from '../../../../environments/environment';
 import {SimpleAuction} from '../../../shared/model/simpleAuction';
 import {Router} from '@angular/router';
+import {AuctionService} from '../../../shared/services/auction.service';
 
 @Component({
   selector: 'app-user-single-auction-on-list',
@@ -14,7 +15,8 @@ export class UserSingleAuctionOnListComponent implements OnInit {
 
   @Input() auction: SimpleAuction;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private auctionService: AuctionService) {
   }
 
   ngOnInit(): void {
@@ -24,4 +26,14 @@ export class UserSingleAuctionOnListComponent implements OnInit {
     this.router.navigateByUrl(`/auctions/${this.auction.id}`);
   }
 
+  public endAuction(): void {
+    this.auctionService.endUsersOwnAuction({auctionId: this.auction.id}).subscribe();
+    this.reloadCurrentRoute();
+  }
+
+  private reloadCurrentRoute(): void {
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate(['user-auctions']);
+    });
+  }
 }

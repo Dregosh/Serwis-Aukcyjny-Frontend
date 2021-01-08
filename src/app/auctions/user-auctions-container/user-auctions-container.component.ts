@@ -17,7 +17,7 @@ import {tap} from 'rxjs/operators';
 export class UserAuctionsContainerComponent implements OnInit, AfterViewInit {
   auctions$: Observable<Page<SimpleAuction>>;
   filterMap = new Map<AuctionFilter, any>();
-  sortType = AuctionSort.ID_DESC;
+  sortType = AuctionSort.END_TIME_DESC;
   hasNext = false;
   hasPrevious = false;
   total = 0;

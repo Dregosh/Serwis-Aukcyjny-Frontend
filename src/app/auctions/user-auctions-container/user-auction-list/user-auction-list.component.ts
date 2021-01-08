@@ -10,6 +10,14 @@ import {SimpleAuction} from '../../../shared/model/simpleAuction';
 export class UserAuctionListComponent implements OnInit {
   sorts = [
     {
+      sort: AuctionSort.END_TIME_ASC,
+      name: 'Data zakończenia - od najbliższej'
+    },
+    {
+      sort: AuctionSort.END_TIME_DESC,
+      name: 'Data zakończenia - od najdalszej'
+    },
+    {
       sort: AuctionSort.TITLE_ASC,
       name: 'Nazwa rosnąco',
     },
@@ -60,8 +68,3 @@ export class UserAuctionListComponent implements OnInit {
     return this.sorts.filter(sort => sort.sort === this.currentSort)[0].name;
   }
 }
-
-/*class Sort {
-  sort: AuctionSort;
-  name: string;
-}*/
