@@ -4,9 +4,9 @@
   </mat-card-title>
   <mat-card-content>
     <form [formGroup]="filterForm">
-      <mat-checkbox formControlName="onlyBuyNow">Tylko kup teraz</mat-checkbox>
-      <mat-checkbox formControlName="onlyCanBid">Tylko licytowane</mat-checkbox>
-      <mat-checkbox formControlName="onlyPromoted">Tylko promowane</mat-checkbox>
+      <mat-checkbox [checked]="filterForm.onlyBuyNow" formControlName="onlyBuyNow" (change)="filterForm.setOnlyCanBid($event.checked ? false : filterForm.onlyBuyNow)">Tylko kup teraz</mat-checkbox>
+      <mat-checkbox [checked]="filterForm.onlyCanBid" formControlName="onlyCanBid" (change)="filterForm.setOnlyBuyNow($event.checked ? false : filterForm.onlyCanBid)">Tylko licytowane</mat-checkbox>
+      <mat-checkbox formControlName="onlyPromoted" >Tylko promowane</mat-checkbox>
       <mat-form-field>
         <label>
           <input matInput type="number" placeholder="Cena Kup Teraz od" formControlName="buyNowPriceFrom"

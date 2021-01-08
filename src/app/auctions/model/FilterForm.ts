@@ -1,5 +1,6 @@
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuctionFilter} from '../../shared/model/AuctionFilter';
+import {tap} from 'rxjs/operators';
 
 export class FilterForm extends FormGroup {
   constructor() {
@@ -9,8 +10,8 @@ export class FilterForm extends FormGroup {
       onlyPromoted: new FormControl('', []),
       bidPriceFrom: new FormControl('', [Validators.min(0)]),
       bidPriceTo: new FormControl('', [Validators.min(0)]),
-      buyNowPriceFrom: new FormControl('', [Validators.min(0)]),
-      buyNowPriceTo: new FormControl('', [Validators.min(0)])
+      buyNowPriceFrom: new FormControl(false, [Validators.min(0)]),
+      buyNowPriceTo: new FormControl(false, [Validators.min(0)])
     });
   }
 
@@ -40,5 +41,19 @@ export class FilterForm extends FormGroup {
     return map;
   }
 
+  public setOnlyBuyNow(value: boolean): void {
+    this.controls.onlyBuyNow.setValue(value);
+  }
 
+  public setOnlyCanBid(value: boolean): void {
+    this.controls.onlyCanBid.setValue(value);
+  }
+
+  public get onlyBuyNow(): boolean {
+    return this.value.onlyBuyNow.value;
+  }
+
+  public get onlyCanBid(): boolean {
+    return this.value.onlyCanBid.value;
+  }
 }

@@ -34,4 +34,8 @@ export class EditUserService {
   public executePasswordChange(command: { newPassword: string; token: string }): Observable<any> {
     return this.httpClient.post<any>(`${this.apiUrl}auth/change-password-confirmation`, command);
   }
+
+  public buyPremiumAccount(): Observable<any> {
+    return this.httpClient.get(`${this.apiUrl}pay/buy-premium-link`, {responseType: 'text'});
+  }
 }
