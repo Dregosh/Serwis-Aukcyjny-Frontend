@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {AuctionSort} from '../model/AuctionSort';
-import {forkJoin, from, merge, Observable, of} from 'rxjs';
+import {forkJoin, from, Observable} from 'rxjs';
 import {SimpleAuction} from '../model/simpleAuction';
 import {AuctionFilter} from '../model/AuctionFilter';
 import {Page} from '../model/page';
@@ -10,7 +10,7 @@ import {Auction} from '../../auctions/model/Auction';
 import {CreateAuction} from '../../auctions/model/CreateAuction';
 import {FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
-import {finalize, switchMap} from 'rxjs/operators';
+import {switchMap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -79,6 +79,10 @@ export class AuctionService {
     }
     return forkJoin(imageSubscribers)
       .pipe(switchMap(() => from(this.router.navigateByUrl(`auctions/${auctionId}`))));
+  }
+
+  public endUsersOwnAuction(command: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}auctions/end-own-auction`, command);
   }
 
   private addSingleImage(image: File, auctionId: number): Observable<any> {

@@ -1,0 +1,53 @@
+<div class="card m-3">
+  <div class="card-header">
+    <div class="row">
+      <div
+        class="col-8 offset-2 text-center align-self-center"><h3
+        class="font-weight-bold pt-1 mb-0">{{auction.title}}</h3>
+      </div>
+      <div class="col-2 text-right pr-2">
+        <button type="button" class="btn btn-danger btn-sm"
+                [hidden]="auction.alreadyBidded || auction.status !== 'STARTED'"
+                title="Aukcję można zakończyć przed czasem tylko jeżeli nikt jeszcze nie zalicytował"
+                (click)="endAuction()">Zakończ aukcję teraz
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row align-items-center p-3">
+    <div class="col-md-4 text-center">
+      <img [src]="photoUrl + auction.mainPhotoName" alt="Auction image" *ngIf="auction.mainPhotoName">
+      <img src="/assets/no-photo-big.jpg" alt="Auction image" *ngIf="!auction.mainPhotoName">
+    </div>
+    <div class="col-md-4">
+      <p>Numer aukcji: #{{auction.id}}</p>
+      <p>Cena "Kup Teraz": {{auction.buyNowPrice}}</p>
+      <p>Cena w licytacji: {{auction.bidPrice}}</p>
+      <a [routerLink]="['rate-as-seller', auction.purchaseId]"
+         class="badge badge-warning text-uppercase p-2 text-wrap"
+         *ngIf="auction.isBought">Wystaw ocenę jako sprzedawca</a>
+    </div>
+    <div class="col-md-4">
+      <div *ngIf="auction.status === 'STARTED'">
+        <p *ngIf="auction.alreadyBidded"><span class="font-weight-bold">Ilość licytujących:
+          {{auction.biddersAmount}}</span></p>
+        <p *ngIf="!auction.alreadyBidded"><span class="font-weight-bold">Aktualnie nikt nie
+        licytuje</span></p>
+      </div>
+      <div *ngIf="auction.status === 'ENDED'">
+        <p class="text-success font-weight-bold" *ngIf="auction.isBought">Produkt został
+          sprzedany</p>
+        <p class="font-weight-bold" *ngIf="!auction.isBought">Nie było ofert kupna</p>
+      </div>
+      <p>Data rozpoczęcia: {{auction.startDateTime}}</p>
+      <p>Data zakończenia: {{auction.endDateTime}}</p>
+      <ng-container [ngSwitch]="auction.status">
+        <p class="text-info" *ngSwitchCase="'CREATED'">Oczekuje na rozpoczęcie</p>
+        <p class="text-primary" *ngSwitchCase="'STARTED'">Aukcja trwa</p>
+        <p class="text-danger" *ngSwitchCase="'ENDED'">Aukcja zakończona</p>
+      </ng-container>
+
+    </div>
+  </div>
+</div>
