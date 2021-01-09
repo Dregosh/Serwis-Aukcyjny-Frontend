@@ -16,6 +16,14 @@
       </app-image-container>
     </div>
     <div class="col-md-6">
+      <div class="row justify-content-end">
+        <div *ngIf="auction.premium" class="mr-3">
+          <mat-icon class="icon" color="warn" >stars</mat-icon>
+        </div>
+        <div *ngIf="auction.observed" class="mr-3">
+          <mat-icon class="icon" color="primary">remove_red_eye</mat-icon>
+        </div>
+      </div>
       <app-auction-description [auction]="auction" (refreshEmitter)="refreshEmitter.emit(true)">
       </app-auction-description>
     </div>

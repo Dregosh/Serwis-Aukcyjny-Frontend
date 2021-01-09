@@ -13,4 +13,5 @@ export interface SimpleAuction {
   purchaseId: number;
   startDateTime: Date;
   endDateTime: Date;
+  promoted: boolean;
 }

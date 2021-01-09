@@ -8,16 +8,21 @@
           </mat-form-field>
         </div>
         <div class="row">
-          <button class="btn btn-info" [disabled]="bidForm.invalid" (click)="bid()">
-            Licytuj
-          </button>
+          <app-button [disabled]="bidForm.invalid" [action]="bid()" text="Licytuj">
+          </app-button>
+          <div class="ml-2">
+            <app-button [text]="auction.observed ? 'Przestań obserwować' : 'Obserwuj'" [action]="auction.observed ? unObserve() : observe()">
+            </app-button>
+          </div>
         </div>
       </form>
     </div>
     <div class="row" *ngIf="auction.canBuyNow">
-      <button class="btn btn-info" (click)="buyNow()">
-        Kup Teraz
-      </button>
+      <app-button text="Kup Teraz" [action]="buyNow()"></app-button>
+      <div class="ml-2">
+        <app-button [text]="auction.observed ? 'Przestań obserwować' : 'Obserwuj'" [action]="auction.observed ? unObserve() : observe()">
+        </app-button>
+      </div>
     </div>
   </ng-container>
   <ng-template #login>

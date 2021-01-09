@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {Auction} from '../../model/Auction';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuctionService} from '../../../shared/services/auction.service';
@@ -17,7 +17,8 @@ export class AuctionActionsComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private auctionService: AuctionService,
-              public authenticationService: AuthenticationService) { }
+              public authenticationService: AuthenticationService) {
+  }
 
   ngOnInit(): void {
     this.bidForm = this.formBuilder.group({
@@ -25,18 +26,17 @@ export class AuctionActionsComponent implements OnInit {
     });
   }
 
-  bid(): void {
-    if (this.bidForm.valid) {
-      this.auctionService.bidAuction(this.auction.id, this.bidForm.value.bidPrice)
-        .pipe(tap(() => this.refreshEmitter.emit(true)))
-        .subscribe();
-    }
-  }
+  bid = () => this.auctionService.bidAuction(this.auction.id, this.bidForm.value.bidPrice)
+    .pipe(tap(() => this.refreshEmitter.emit(true)));
 
-  buyNow(): void {
-    this.auctionService.buyNow(this.auction.id)
-      .pipe(tap(() => this.refreshEmitter.emit(true)))
-      .subscribe();
-  }
+
+  buyNow = () => this.auctionService.buyNow(this.auction.id)
+    .pipe(tap(() => this.refreshEmitter.emit(true)));
+
+  observe = () => this.auctionService.observe(this.auction.id)
+    .pipe(tap(() => this.refreshEmitter.emit(true)));
+
+  unObserve = () => this.auctionService.unobserve(this.auction.id)
+    .pipe(tap(() => this.refreshEmitter.emit(true)));
 
 }
