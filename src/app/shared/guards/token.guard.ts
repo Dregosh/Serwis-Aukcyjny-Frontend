@@ -13,7 +13,7 @@ export class TokenGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (this.tokenStore.getToken() && this.tokenStore.isExpired()) {
-        this.tokenStore.clearTokens();
+      this.tokenStore.clearTokens();
     }
     return true;
   }

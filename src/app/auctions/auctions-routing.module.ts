@@ -7,6 +7,7 @@ import {CreateAuctionComponent} from './create-auction/create-auction.component'
 import {AuctionComponentComponent} from './auction-component/auction-component.component';
 import {MainCompomentComponent} from './main-compoment/main-compoment.component';
 import {UserAuctionsContainerComponent} from './user-auctions-container/user-auctions-container.component';
+import {AuthenticatedGuard} from '../shared/guards/authenticated.guard';
 
 const routes: Routes = [
   {
@@ -38,13 +39,15 @@ const routes: Routes = [
       },
       {
         path: 'create-auction',
-        component: CreateAuctionComponent
+        component: CreateAuctionComponent,
+        canActivate: [AuthenticatedGuard],
       }
     ]
   },
   {
     path: 'user-auctions',
-    component: UserAuctionsContainerComponent
+    component: UserAuctionsContainerComponent,
+    canActivate: [AuthenticatedGuard],
   }
 ];
 
