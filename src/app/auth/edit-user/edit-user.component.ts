@@ -7,6 +7,7 @@ import {switchMap, tap} from 'rxjs/operators';
 import {UserExist} from '../registration-page/model/userExist';
 import {Router} from '@angular/router';
 import {identEmailsValidator} from './validators/ident-emails.validator';
+import {of} from 'rxjs';
 
 @Component({
   selector: 'app-edit-user',
@@ -95,6 +96,9 @@ export class EditUserComponent implements OnInit {
         .subscribe();
     }
   }
+
+  buyPremiumAccount = () => this.editUserService.buyPremiumAccount()
+    .pipe(tap(url => window.location.href = url))
 
   onPasswordChange(): void {
     this.editUserService.changePasswordRequest()

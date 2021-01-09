@@ -9,6 +9,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {AppButtonComponent} from './app-button/app-button.component';
 import {AuctionBeltComponent} from './auction-belt/auction-belt.component';
 import {SingleAuctionCardComponent} from './single-auction-card/single-auction-card.component';
+import {AuthenticatedGuard} from './guards/authenticated.guard';
+import {RedirectStore} from './services/redirect.store';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,7 @@ import {SingleAuctionCardComponent} from './single-auction-card/single-auction-c
     MatListModule,
     MatIconModule,
   ],
-  providers: [],
+  providers: [AuthenticatedGuard, RedirectStore],
   exports: [
     AppButtonComponent,
     AuctionBeltComponent,

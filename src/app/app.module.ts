@@ -15,6 +15,10 @@ import {AuthModule} from './auth/auth.module';
 import {TokenInterceptor} from './shared/interceptors/token.interceptor';
 import {SharedModule} from './shared/shared.module';
 import {NavbarComponent} from './navbar/navbar.component';
+import localePl from '@angular/common/locales/pl';
+import {registerLocaleData} from '@angular/common';
+
+registerLocaleData(localePl);
 
 @NgModule({
   declarations: [

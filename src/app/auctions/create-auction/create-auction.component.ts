@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {CreateAuction} from '../model/CreateAuction';
 import {AuctionService} from '../../shared/services/auction.service';
@@ -18,8 +18,7 @@ export class CreateAuctionComponent implements OnInit {
   private addedImages: [];
 
   constructor(private auctionService: AuctionService,
-              private formBuilder: FormBuilder,
-              private router: Router) {
+              private formBuilder: FormBuilder) {
   }
 
   public ngOnInit(): void {
@@ -27,7 +26,7 @@ export class CreateAuctionComponent implements OnInit {
     this.auctionForm = this.formBuilder.group({
       title: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
-      startDate: new FormControl('', Validators.required),
+      startDate: new FormControl(this.getMinDate(), Validators.required),
       buyNowPrice: new FormControl('', [Validators.required, Validators.min(0)]),
       minPrice: new FormControl('', [Validators.required, Validators.min(0)]),
       promoted: new FormControl(false),
@@ -40,5 +39,11 @@ export class CreateAuctionComponent implements OnInit {
 
   selectFiles(event): void {
     this.addedImages = event.target.files;
+  }
+
+  getMinDate(): Date {
+    const minDate = new Date();
+    minDate.setDate(minDate.getDate() + 1);
+    return minDate;
   }
 }
