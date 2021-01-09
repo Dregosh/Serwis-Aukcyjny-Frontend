@@ -39,21 +39,12 @@ export class TokenStore {
     this.init();
   }
 
-  public setToken(token: string): void {
-    localStorage.setItem(this.TOKEN, token);
-    this.init();
-  }
-
   public isEmailVerified(): boolean {
     return this.decoder.decodeToken(this.getToken()).email_verified;
   }
 
-  public getUsername(): string {
-    return this.decoder.decodeToken(this.getToken()).preferred_username;
-  }
-
   public isExpired(): boolean {
-    return this.decoder.isTokenExpired();
+    return this.decoder.isTokenExpired(this.getToken());
   }
 }
 

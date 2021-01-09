@@ -9,6 +9,7 @@ import {EmailChangeConfirmationComponent} from './edit-user/email-change-confirm
 import {RegistrationPageComponent} from './registration-page/registration-page.component';
 import {EmailChangeRequestConfirmationComponent} from './edit-user/email-change-request-confirmation/email-change-request-confirmation.component';
 import {PasswordChangeFormComponent} from './edit-user/password-change-form/password-change-form.component';
+import {AuthenticatedGuard} from '../shared/guards/authenticated.guard';
 
 const routes: Routes = [
   {
@@ -22,8 +23,10 @@ const routes: Routes = [
   },
   {
     path: 'my-account',
-    component: EditUserComponent
-  }, {
+    component: EditUserComponent,
+    canActivate: [AuthenticatedGuard],
+  },
+  {
     path: 'registration-completed',
     component: RegistrationConfirmationComponent
   },
