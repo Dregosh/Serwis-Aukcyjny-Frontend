@@ -1,7 +1,7 @@
 <div class="container">
   <p>Opis przedmiotu: {{auction.description}}</p>
   <p>Sprzedawca: {{auction.sellerDisplayName}}
-    <span *ngIf="auction.userAuction">(Ty jesteś sprzedawcą)</span></p>
+    <span *ngIf="auction.userAuction" class="font-weight-bold">(Ty jesteś sprzedawcą)</span></p>
   <p class="mt-4">Data rozpoczęcia licytacji: {{auction.startDateTime}}</p>
   <p class="mb-4">Data zakończenia licytacji: {{auction.endDateTime}}</p>
   <ng-container [ngSwitch]="auction.status">

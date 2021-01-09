@@ -7,8 +7,8 @@
       </div>
       <div class="col-2 text-right pr-2">
         <button type="button" class="btn btn-danger btn-sm"
-                [hidden]="auction.alreadyBidded || auction.status !== 'STARTED'"
-                title="Aukcję można zakończyć przed czasem tylko jeżeli nikt jeszcze nie zalicytował"
+                [hidden]="auction.status !== 'CREATED'"
+                title="Aukcję można zakończyć tylko przed rozpoczęciem licytacji"
                 (click)="endAuction()">Zakończ aukcję teraz
         </button>
       </div>
@@ -22,8 +22,12 @@
     </div>
     <div class="col-md-4">
       <p>Numer aukcji: #{{auction.id}}</p>
-      <p>Cena "Kup Teraz": {{auction.buyNowPrice}}</p>
-      <p>Cena w licytacji: {{auction.bidPrice}}</p>
+      <p *ngIf="auction.status !== 'STARTED'">Cena "Kup Teraz": {{auction.buyNowPrice}} zł</p>
+      <p>
+        <del *ngIf="auction.status === 'STARTED'">Cena "Kup Teraz": {{auction.buyNowPrice}} zł</del>
+        <span *ngIf="auction.status === 'STARTED'"> (trwa już licytacja)</span></p>
+      <p>Cena w licytacji: {{auction.bidPrice}} zł <span *ngIf="auction.status === 'CREATED'">(gdy się
+        rozpocznie)</span></p>
       <a [routerLink]="['rate-as-seller', auction.purchaseId]"
          class="badge badge-warning text-uppercase p-2 text-wrap"
          *ngIf="auction.isBought">Wystaw ocenę jako sprzedawca</a>
@@ -43,9 +47,9 @@
       <p>Data rozpoczęcia: {{auction.startDateTime}}</p>
       <p>Data zakończenia: {{auction.endDateTime}}</p>
       <ng-container [ngSwitch]="auction.status">
-        <p class="text-info" *ngSwitchCase="'CREATED'">Oczekuje na rozpoczęcie</p>
-        <p class="text-primary" *ngSwitchCase="'STARTED'">Aukcja trwa</p>
-        <p class="text-danger" *ngSwitchCase="'ENDED'">Aukcja zakończona</p>
+        <p class="text-info" *ngSwitchCase="'CREATED'">Przed rozpoczęciem licytacji</p>
+        <p class="text-primary" *ngSwitchCase="'STARTED'">Trwa licytacja</p>
+        <p class="text-danger" *ngSwitchCase="'ENDED'">Zakończono licytację</p>
       </ng-container>
 
     </div>
