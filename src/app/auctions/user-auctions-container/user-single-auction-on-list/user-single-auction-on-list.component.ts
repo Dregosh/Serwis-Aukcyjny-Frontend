@@ -3,6 +3,7 @@ import {environment} from '../../../../environments/environment';
 import {SimpleAuction} from '../../../shared/model/simpleAuction';
 import {Router} from '@angular/router';
 import {AuctionService} from '../../../shared/services/auction.service';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-single-auction-on-list',
@@ -22,13 +23,10 @@ export class UserSingleAuctionOnListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public goToAuction(): void {
-    this.router.navigateByUrl(`/auctions/${this.auction.id}`);
-  }
-
   public endAuction(): void {
-    this.auctionService.endUsersOwnAuction({auctionId: this.auction.id}).subscribe();
-    this.reloadCurrentRoute();
+    this.auctionService.endUsersOwnAuction({auctionId: this.auction.id})
+      .pipe(finalize(() => this.reloadCurrentRoute()))
+      .subscribe();
   }
 
   private reloadCurrentRoute(): void {

@@ -75,12 +75,15 @@ export class AuctionService {
   }
 
   public addImagesToAuction(images: File[], auctionId: number): Observable<any> {
-    const imageSubscribers = [];
-    for (const image of images) {
-      imageSubscribers.push(this.addSingleImage(image, auctionId));
+    if (images) {
+      const imageSubscribers = [];
+      for (const image of images) {
+        imageSubscribers.push(this.addSingleImage(image, auctionId));
+      }
+      return forkJoin(imageSubscribers)
+        .pipe(switchMap(() => from(this.router.navigateByUrl(`auctions/${auctionId}`))));
     }
-    return forkJoin(imageSubscribers)
-      .pipe(switchMap(() => from(this.router.navigateByUrl(`auctions/${auctionId}`))));
+    return from(this.router.navigateByUrl(`auctions/${auctionId}`));
   }
 
   public endUsersOwnAuction(command: any): Observable<any> {
@@ -91,5 +94,13 @@ export class AuctionService {
     const form = new FormData();
     form.append('file', image);
     return this.http.post(`${this.apiUrl}auctions/${auctionId}/images`, form);
+  }
+
+  observe(auctionId: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}auctions/${auctionId}/observe`, null);
+  }
+
+  unobserve(auctionId: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}auctions/${auctionId}/stop-observing`, null);
   }
 }
