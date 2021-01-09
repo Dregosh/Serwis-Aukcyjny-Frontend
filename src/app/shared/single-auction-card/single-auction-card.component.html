@@ -7,7 +7,7 @@
   <mat-card-content>
     <div class="row justify-content-around">
       <div *ngIf="!auction.alreadyBidded">Kup Teraz: {{auction.buyNowPrice}}</div>
-      <div>Licytuj: {{auction.bidPrice}}</div>
+      <div *ngIf="auction.alreadyBidded">Licytuj: {{auction.bidPrice}}</div>
     </div>
   </mat-card-content>
 </mat-card>
