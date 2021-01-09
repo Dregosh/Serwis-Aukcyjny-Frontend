@@ -3,3 +3,10 @@ mat-card{
   max-width: 290px;
   margin: 5px;
 }
+img {
+  max-width: 275px;
+  width: 275px;
+
+  max-height: 250px;
+  height: 250px;
+}
