@@ -1,5 +1,23 @@
 <div class="w-50 ml-auto mr-auto">
   <mat-card class="m-3">
+    <mat-card-title class="mb-4">Typ konta</mat-card-title>
+    <mat-card-content>
+      <div class="mb-1">
+        Konto: {{loggedUser.premiumAccount ? 'PREMIUM' : 'PODSTAWOWE'}}
+      </div>
+      <div class="mb-1" *ngIf="loggedUser.premiumAccount && loggedUser.premiumAccountExpiration">
+        Ważne do: {{loggedUser.premiumAccountExpiration | date: 'dd-MM-yyyy' }}
+      </div>
+      <div class="mb-1" *ngIf="loggedUser.canBuyPremiumAccount">
+        <app-button [text]="loggedUser.premiumAccount ? 'Wydłuż konto premium' : 'Wykup konto premium'" [action]="buyPremiumAccount()">
+        </app-button>
+      </div>
+      <div class="mb-1" *ngIf="!loggedUser.canBuyPremiumAccount">
+        Nie możesz w tym momencie wykupić konta premium, spróbuj ponownie później.
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="m-3">
     <mat-card-title class="mb-4">Edycja danych użytkownika</mat-card-title>
     <mat-card-content>
       <form [formGroup]="editionForm" (ngSubmit)="onSubmit()" novalidate>
@@ -119,9 +137,10 @@
   </mat-card>
   <mat-card class="m-3">
     <mat-card-content>
-        <button class="btn btn-info" type="button" [disabled]="changePasswordRequested"
-                (click)="onPasswordChange()">Zmień hasło</button>
-        <span class="ml-3" *ngIf="changePasswordRequested">Wiadomość z linkiem do
+      <button class="btn btn-info" type="button" [disabled]="changePasswordRequested"
+              (click)="onPasswordChange()">Zmień hasło
+      </button>
+      <span class="ml-3" *ngIf="changePasswordRequested">Wiadomość z linkiem do
           formularza zmiany hasła została wysłana. Sprawdź pocztę.</span>
     </mat-card-content>
   </mat-card>

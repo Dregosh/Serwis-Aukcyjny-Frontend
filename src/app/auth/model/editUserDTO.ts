@@ -10,4 +10,7 @@ export interface EditUserDTO {
     number: string;
     postal: string;
   };
+  premiumAccount: boolean;
+  canBuyPremiumAccount: boolean;
+  premiumAccountExpiration: Date;
 }

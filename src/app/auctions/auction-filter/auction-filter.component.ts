@@ -21,5 +21,4 @@ export class AuctionFilterComponent implements OnInit {
   public onFilter(): void {
     this.filterFormChangeEmitter.emit(this.filterForm.toAuctionFilterMap());
   }
-
 }
