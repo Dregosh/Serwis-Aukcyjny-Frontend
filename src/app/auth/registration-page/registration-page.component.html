@@ -10,11 +10,14 @@
                                                style="color: red; font-weight: bold">*</span></label>
           <input type="text" class="form-control" id="displayName" placeholder="Użytkownik" formControlName="displayName">
         </div>
+        <p *ngIf="registerForm.controls.displayName.invalid" class="invalid">Nazwa użytkownika musi się składać conajmniej z sześciu znaków</p>
         <div class="form-group">
           <label for="password">Hasło: <span *ngIf="registerForm.get('password').invalid"
                                              style="color: red; font-weight: bold">*</span></label>
           <input id="password" type="password" formControlName="password" class="form-control" placeholder="Hasło">
         </div>
+        <p *ngIf="registerForm.controls.password.invalid" class="invalid">Nazwa użytkownika musi się składać conajmniej z sześciu znaków, zawierać conajmniej jedną dużą i jedną małą literę i cyfrę</p>
+
         <div class="form-group">
           <label for="repeatPassword">Powtórz hasło: <span *ngIf="registerForm.get('repeatPassword').invalid"
                                                            style="color: red; font-weight: bold">*</span></label>
@@ -27,42 +30,49 @@
           <input id="email" type="text" formControlName="email" class="form-control"
                  placeholder="Email">
         </div>
+        <p *ngIf="registerForm.controls.email.invalid" class="invalid">Nieprawidłowy email</p>
         <div class="form-group">
           <label for="firstName">Imię: <span *ngIf="registerForm.get('firstName').invalid"
                                              style="color: red; font-weight: bold">*</span></label>
           <input id="firstName" type="text" formControlName="firstName" class="form-control"
                  placeholder="Imię">
         </div>
+        <p *ngIf="registerForm.controls.firstName.invalid" class="invalid">Nieprawidłowe imię</p>
         <div class="form-group">
           <label for="lastName">Nazwisko: <span *ngIf="registerForm.get('lastName').invalid"
                                                 style="color: red; font-weight: bold">*</span></label>
           <input id="lastName" type="text" formControlName="lastName" class="form-control"
                  placeholder="Nazwisko">
         </div>
+        <p *ngIf="registerForm.controls.lastName.invalid" class="invalid">Nieprawidłowe nazwisko</p>
         <div class="form-group">
           <label for="city">Miasto: <span *ngIf="registerForm.get('city').invalid"
                                                 style="color: red; font-weight: bold">*</span></label>
           <input id="city" type="text" formControlName="city" class="form-control"
                  placeholder="Miasto">
         </div>
+        <p *ngIf="registerForm.controls.city.invalid" class="invalid">Miasto nie może być puste</p>
         <div class="form-group">
           <label for="postal">Kod-pocztowy: <span *ngIf="registerForm.get('postal').invalid"
                                           style="color: red; font-weight: bold">*</span></label>
           <input id="postal" type="text" formControlName="postal" class="form-control"
                  placeholder="Kod Pocztowy">
         </div>
+        <p *ngIf="registerForm.controls.postal.invalid" class="invalid">Kod pocztowy musi być w formacie XX-XXX</p>
         <div class="form-group">
         <label for="street">Ulica: <span *ngIf="registerForm.get('street').invalid"
                                          style="color: red; font-weight: bold">*</span></label>
         <input id="street" type="text" formControlName="street" class="form-control"
                placeholder="Ulica">
       </div>
+        <p *ngIf="registerForm.controls.street.invalid" class="invalid">Ulica nie może być pusta</p>
         <div class="form-group">
           <label for="houseNumber">Numer domu: <span *ngIf="registerForm.get('houseNumber').invalid"
                                            style="color: red; font-weight: bold">*</span></label>
           <input id="houseNumber" type="text" formControlName="houseNumber" class="form-control"
                  placeholder="Numer domu">
         </div>
+        <p *ngIf="registerForm.controls.houseNumber.invalid" class="invalid">Numer domu nie może być pusty</p>
         <div class="row" style="margin-bottom: 10px">
           <div class="col-md-12" *ngIf="!registerForm.valid">
               <span class="text-error" style="color: red">
