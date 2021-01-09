@@ -15,25 +15,22 @@
     </div>
     <div class="col-md-4">
       <p>Numer aukcji: #{{auction.id}}</p>
-      <p *ngIf="auction.biddersAmount === 0">Cena "Kup Teraz": {{auction.buyNowPrice}}</p>
-      <p>Aktualna cena w licytacji: {{auction.bidPrice}}</p>
-      <a [routerLink]="['rate-as-seller', auction.purchaseId]"
-         class="badge badge-warning text-uppercase p-2 text-wrap"
-         *ngIf="auction.isBought">Wystaw ocenę jako sprzedawca</a>
+      <p *ngIf="auction.status === 'CREATED'">Cena "Kup Teraz": {{auction.buyNowPrice}}</p>
+      <p *ngIf="auction.status === 'STARTED'">Aktualna cena w licytacji: {{auction.bidPrice}}</p>
     </div>
     <div class="col-md-4">
-      <div>
+      <div *ngIf="auction.status === 'STARTED'">
         <p *ngIf="auction.alreadyBidded"><span class="font-weight-bold">Ilość licytujących:
           {{auction.biddersAmount}}</span></p>
-        <p *ngIf="!auction.alreadyBidded"><span class="font-weight-bold">Aktualnie nikt nie
-        licytuje</span></p>
+        <p *ngIf="!auction.alreadyBidded"><span class="font-weight-bold">Nikt jeszcze nie
+        zalicytował</span></p>
       </div>
-      <p>Data rozpoczęcia: {{auction.startDateTime}}</p>
-      <p>Data zakończenia: {{auction.endDateTime}}</p>
+      <p>Data rozpoczęcia licytacji: {{auction.startDateTime}}</p>
+      <p>Data zakończenia licytacji: {{auction.endDateTime}}</p>
       <ng-container [ngSwitch]="auction.status">
-        <p class="text-info" *ngSwitchCase="'CREATED'">Oczekuje na rozpoczęcie</p>
-        <p class="text-primary" *ngSwitchCase="'STARTED'">Aukcja trwa</p>
-        <p class="text-danger" *ngSwitchCase="'ENDED'">Aukcja zakończona</p>
+        <p class="text-info" *ngSwitchCase="'CREATED'">Przed rozpoczęciem licytacji</p>
+        <p class="text-primary" *ngSwitchCase="'STARTED'">Trwa licytacja</p>
+        <p class="text-danger" *ngSwitchCase="'ENDED'">Zakończono licytację</p>
       </ng-container>
     </div>
   </div>
