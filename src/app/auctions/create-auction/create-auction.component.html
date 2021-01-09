@@ -18,7 +18,7 @@
         <div class="row  justify-content-center">
           <mat-form-field appearance="fill">
             <mat-label>Wybierz datę startu</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="startDate">
+            <input matInput [min]="getMinDate()" [matDatepicker]="picker" formControlName="startDate">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>

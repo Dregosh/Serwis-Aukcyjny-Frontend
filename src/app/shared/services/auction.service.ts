@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable, LOCALE_ID} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {AuctionSort} from '../model/AuctionSort';
@@ -11,6 +11,7 @@ import {CreateAuction} from '../../auctions/model/CreateAuction';
 import {FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
+import {formatDate} from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class AuctionService {
 
   apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient,
+              private router: Router) {
   }
 
   public getAuctions(categoryId: number, page: number, size: number,
