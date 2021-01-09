@@ -30,14 +30,14 @@ export class RegistrationPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      displayName: ['', Validators.required],
-      password: ['', Validators.required],
+      displayName: ['', [Validators.required, Validators.pattern('.{6,}')]],
+      password: ['', [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$')]],
       repeatPassword: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', Validators.email],
+      firstName: ['', [Validators.required, Validators.pattern('^[A-ZĄĘŚŁŻŹĆŃÓ][a-ząęśłżźćńó]+$')]],
+      lastName: ['', [Validators.required, Validators.pattern('^[A-ZĄĘŚŁŻŹĆŃÓ][a-ząęśłżźćńó]+$')]],
+      email: ['', [Validators.required, Validators.email]],
       city: ['', Validators.required],
-      postal: ['', Validators.required],
+      postal: ['', [Validators.required, Validators.pattern('^[0-9]{2}-[0-9]{3}$')]],
       street: ['', Validators.required],
       houseNumber: ['', Validators.required],
     }, {validator: RegistrationPageComponent.checkPassword});
