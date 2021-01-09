@@ -1,23 +1,21 @@
 <div class="container">
-  <div class="row justify-content-start title">
-    {{auction.title}}
-  </div>
-  <div class="row justify-content-start seller">
-    od: {{auction.sellerDisplayName}}
-  </div>
-  <div class="row justify-content-start price">
-    <div *ngIf="auction.canBid">
-      Aktualna licytacja: {{auction.maxBid}} zł
-    </div>
-    <div *ngIf=auction.canBuyNow>
-      Kup teraz: {{auction.buyNowPrice}} zł
-    </div>
-  </div>
-  <div class="row justify-content-start description">
-    {{auction.description}}
-  </div>
+  <p>Opis przedmiotu: {{auction.description}}</p>
+  <p>Sprzedawca: {{auction.sellerDisplayName}}
+    <span *ngIf="auction.userAuction">(Ty jesteś sprzedawcą)</span></p>
+  <p class="mt-4">Data rozpoczęcia licytacji: {{auction.startDateTime}}</p>
+  <p class="mb-4">Data zakończenia licytacji: {{auction.endDateTime}}</p>
+  <ng-container [ngSwitch]="auction.status">
+    <p class="text-info" *ngSwitchCase="'CREATED'">Oczekuje na rozpoczęcie licytacji</p>
+    <p class="text-primary" *ngSwitchCase="'STARTED'">Trwa licytacja</p>
+    <p class="text-danger" *ngSwitchCase="'ENDED'">Aukcja zakończona</p>
+  </ng-container>
+  <p *ngIf="auction.canBid" class="font-weight-bold">
+    Aktualna cena w licytacji: {{auction.maxBid}} zł
+  </p>
+  <p *ngIf=auction.canBuyNow class="font-weight-bold">Cena "Kup teraz": {{auction.buyNowPrice}} zł</p>
   <div class="row justify-content-start actions" *ngIf=canDoAnyAction>
-    <app-auction-actions [auction]="auction" (refreshEmitter)="refreshEmitter.emit(true)"></app-auction-actions>
+    <app-auction-actions [auction]="auction"
+                         (refreshEmitter)="refreshEmitter.emit(true)"></app-auction-actions>
   </div>
   <div class="row justify-content-start ended" *ngIf="isEnded">
     <app-auction-ended></app-auction-ended>

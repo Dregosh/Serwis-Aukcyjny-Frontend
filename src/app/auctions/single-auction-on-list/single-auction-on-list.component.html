@@ -1,14 +1,40 @@
-<div class="container m-1" (click)="goToAuction()">
-  <div class="row align-items-center">
-    <div class="col-md-4">
+<div class="card m-3" (click)="goToAuction()">
+  <div class="card-header">
+    <div class="row">
+      <div
+        class="col-8 offset-2 text-center align-self-center"><h3
+        class="font-weight-bold pt-1 mb-0">{{auction.title}}</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="row align-items-center p-3">
+    <div class="col-md-4 text-center">
       <img [src]="photoUrl + auction.mainPhotoName" alt="Auction image" *ngIf="auction.mainPhotoName">
       <img src="/assets/no-photo-big.jpg" alt="Auction image" *ngIf="!auction.mainPhotoName">
     </div>
     <div class="col-md-4">
-      <h3>{{auction.title}}</h3>
-      <div *ngIf="!auction.alreadyBidded">Kup Teraz: {{auction.buyNowPrice}}</div>
-      <div>Licytuj: {{auction.bidPrice}}</div>
+      <p>Numer aukcji: #{{auction.id}}</p>
+      <p *ngIf="auction.biddersAmount === 0">Cena "Kup Teraz": {{auction.buyNowPrice}}</p>
+      <p>Aktualna cena w licytacji: {{auction.bidPrice}}</p>
+      <a [routerLink]="['rate-as-seller', auction.purchaseId]"
+         class="badge badge-warning text-uppercase p-2 text-wrap"
+         *ngIf="auction.isBought">Wystaw ocenę jako sprzedawca</a>
+    </div>
+    <div class="col-md-4">
+      <div>
+        <p *ngIf="auction.alreadyBidded"><span class="font-weight-bold">Ilość licytujących:
+          {{auction.biddersAmount}}</span></p>
+        <p *ngIf="!auction.alreadyBidded"><span class="font-weight-bold">Aktualnie nikt nie
+        licytuje</span></p>
+      </div>
+      <p>Data rozpoczęcia: {{auction.startDateTime}}</p>
+      <p>Data zakończenia: {{auction.endDateTime}}</p>
+      <ng-container [ngSwitch]="auction.status">
+        <p class="text-info" *ngSwitchCase="'CREATED'">Oczekuje na rozpoczęcie</p>
+        <p class="text-primary" *ngSwitchCase="'STARTED'">Aukcja trwa</p>
+        <p class="text-danger" *ngSwitchCase="'ENDED'">Aukcja zakończona</p>
+      </ng-container>
     </div>
   </div>
-
 </div>
