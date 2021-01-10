@@ -1,10 +1,14 @@
 import {Injectable} from '@angular/core';
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {TokenStore} from '../services/token.store';
 import {environment} from '../../../environments/environment';
 import {AuthenticationService} from '../services/authentication.service';
 import {catchError, filter, finalize, switchMap, take, tap} from 'rxjs/operators';
+import {MatDialog} from '@angular/material/dialog';
+import {Error} from '../model/error';
+import {ErrorCodeComponent} from '../modals/error-code/error-code.component';
+import {InternalErrorComponent} from '../modals/internal-error/internal-error.component';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +18,7 @@ export class TokenInterceptor implements HttpInterceptor {
   tokenSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   keycloakUrl = environment.keycloakUrl;
 
-  constructor(private tokenStore: TokenStore, private authenticationService: AuthenticationService) {
+  constructor(private tokenStore: TokenStore, private authenticationService: AuthenticationService, private dialog: MatDialog) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -26,7 +30,7 @@ export class TokenInterceptor implements HttpInterceptor {
           return throwError(err);
         }
         if (err.status !== 401) {
-          return throwError(err);
+          return this.handleError(err);
         }
         if (this.isRefreshingToken) {
           return this.tokenSubject
@@ -41,7 +45,7 @@ export class TokenInterceptor implements HttpInterceptor {
           return this.authenticationService.refreshToken()
             .pipe(
               tap((tokenResponse) => this.tokenSubject.next(tokenResponse.access_token)),
-              switchMap((tokenResponse) =>  next.handle(this.applyToken(req))),
+              switchMap((tokenResponse) => next.handle(this.applyToken(req))),
               finalize(() => this.isRefreshingToken = false));
         }
       }));
@@ -57,5 +61,17 @@ export class TokenInterceptor implements HttpInterceptor {
       });
     }
     return req;
+  }
+
+  private handleError(err: HttpErrorResponse): Observable<any> {
+    const error: Error = err.error;
+    if (error) {
+      return this.dialog.open(ErrorCodeComponent, {
+        data: error.errorCode
+      }).afterClosed()
+        .pipe(switchMap(() => throwError(err)));
+    }
+    return this.dialog.open(InternalErrorComponent).afterClosed()
+      .pipe(switchMap(() => throwError(err)));
   }
 }

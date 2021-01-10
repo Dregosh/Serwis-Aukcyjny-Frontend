@@ -2,8 +2,10 @@ import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {Auction} from '../../model/Auction';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuctionService} from '../../../shared/services/auction.service';
-import {tap} from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
 import {AuthenticationService} from '../../../shared/services/authentication.service';
+import {MatDialog} from '@angular/material/dialog';
+import {AuctionBoughtComponent} from '../../../shared/modals/auction-bought/auction-bought.component';
 
 @Component({
   selector: 'app-auction-actions',
@@ -17,7 +19,8 @@ export class AuctionActionsComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private auctionService: AuctionService,
-              public authenticationService: AuthenticationService) {
+              public authenticationService: AuthenticationService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -31,7 +34,8 @@ export class AuctionActionsComponent implements OnInit {
 
 
   buyNow = () => this.auctionService.buyNow(this.auction.id)
-    .pipe(tap(() => this.refreshEmitter.emit(true)));
+    .pipe(switchMap(() => this.dialog.open(AuctionBoughtComponent).afterClosed()
+        .pipe(tap(() => this.refreshEmitter.emit(true)))));
 
   observe = () => this.auctionService.observe(this.auction.id)
     .pipe(tap(() => this.refreshEmitter.emit(true)));

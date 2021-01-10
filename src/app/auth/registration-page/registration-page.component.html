@@ -16,7 +16,7 @@
                                              style="color: red; font-weight: bold">*</span></label>
           <input id="password" type="password" formControlName="password" class="form-control" placeholder="Hasło">
         </div>
-        <p *ngIf="registerForm.controls.password.invalid" class="invalid">Nazwa użytkownika musi się składać conajmniej z sześciu znaków, zawierać conajmniej jedną dużą i jedną małą literę i cyfrę</p>
+        <p *ngIf="registerForm.controls.password.invalid" class="invalid">Hasło musi się składać conajmniej z sześciu znaków, zawierać conajmniej jedną dużą i jedną małą literę i cyfrę</p>
 
         <div class="form-group">
           <label for="repeatPassword">Powtórz hasło: <span *ngIf="registerForm.get('repeatPassword').invalid"
