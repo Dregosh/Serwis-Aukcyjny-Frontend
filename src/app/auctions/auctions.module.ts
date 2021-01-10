@@ -34,6 +34,7 @@ import {UserAuctionsContainerComponent} from './user-auctions-container/user-auc
 import { UserSingleAuctionOnListComponent } from './user-auctions-container/user-single-auction-on-list/user-single-auction-on-list.component';
 import { UserAuctionListComponent } from './user-auctions-container/user-auction-list/user-auction-list.component';
 import {MatRadioModule} from '@angular/material/radio';
+import { TransactionRateFormComponent } from '../shared/transaction-rate-form/transaction-rate-form.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import {MatRadioModule} from '@angular/material/radio';
     AuctionComponentComponent,
     UserAuctionsContainerComponent,
     UserSingleAuctionOnListComponent,
-    UserAuctionListComponent
+    UserAuctionListComponent,
+    TransactionRateFormComponent
   ],
     imports: [
         CommonModule,

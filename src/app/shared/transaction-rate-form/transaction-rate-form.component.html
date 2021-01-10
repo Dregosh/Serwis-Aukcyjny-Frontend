@@ -1,0 +1,39 @@
+<div class="container text-center">
+  <mat-card class="m-3">
+    <mat-card-title class="mb-4">Twoja ocena transakcji</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="ratingForm" (ngSubmit)="onSubmit()" novalidate>
+
+        <div class="row justify-content-center">
+          <ul class="rate-area list-unstyled">
+            <input type="radio" id="5-star" formControlName="rating" value="5" #rating5
+                   (click)="onSetRating(rating5.value)">
+            <label for="5-star" title="Doskonała">5 stars</label>
+            <input type="radio" id="4-star" formControlName="rating" value="4" #rating4
+                   (click)="onSetRating(rating4.value)">
+            <label for="4-star" title="Dobra">4 stars</label>
+            <input type="radio" id="3-star" formControlName="rating" value="3" #rating3
+                   (click)="onSetRating(rating3.value)">
+            <label for="3-star" title="Przeciętna">3 stars</label>
+            <input type="radio" id="2-star" formControlName="rating" value="2" #rating2
+                   (click)="onSetRating(rating2.value)">
+            <label for="2-star" title="Słaba">2 stars</label>
+            <input type="radio" id="1-star" required="" formControlName="rating" value="1" #rating1
+                   (click)="onSetRating(rating1.value)">
+            <label for="1-star" title="Zła">1 star</label>
+          </ul>
+        </div>
+        <div class="row justify-content-center mb-2">
+          <p [className]="rateTextStyle">{{currentRating}}</p>
+        </div>
+
+          <label for="comment">Komentarz do transakcji (opcjonalnie)</label>
+          <textarea id="comment" class="form-control w-50 mx-auto" rows="5" maxlength="255"
+                    formControlName="comment"></textarea>
+
+        <button class="btn btn-primary mt-3" type="submit"
+                [disabled]="!ratingForm.valid || ratingForm.pristine">Wystaw ocenę</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

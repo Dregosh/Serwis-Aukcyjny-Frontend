@@ -8,6 +8,7 @@ import {AuctionComponentComponent} from './auction-component/auction-component.c
 import {MainCompomentComponent} from './main-compoment/main-compoment.component';
 import {UserAuctionsContainerComponent} from './user-auctions-container/user-auctions-container.component';
 import {AuthenticatedGuard} from '../shared/guards/authenticated.guard';
+import {TransactionRateFormComponent} from '../shared/transaction-rate-form/transaction-rate-form.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,10 @@ const routes: Routes = [
     path: 'user-auctions',
     component: UserAuctionsContainerComponent,
     canActivate: [AuthenticatedGuard],
+  },
+  {
+    path: 'rate-as-seller/:purchaseId',
+    component: TransactionRateFormComponent
   }
 ];
 

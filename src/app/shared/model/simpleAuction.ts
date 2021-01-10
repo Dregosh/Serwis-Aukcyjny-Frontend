@@ -10,6 +10,7 @@ export interface SimpleAuction {
   biddersAmount: number;
   status: AuctionStatus;
   isBought: boolean;
+  alreadyRatedBySeller: boolean;
   purchaseId: number;
   startDateTime: Date;
   endDateTime: Date;

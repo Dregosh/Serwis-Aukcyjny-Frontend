@@ -28,9 +28,11 @@
         <span *ngIf="auction.status === 'STARTED'"> (trwa już licytacja)</span></p>
       <p>Cena w licytacji: {{auction.bidPrice}} zł <span *ngIf="auction.status === 'CREATED'">(gdy się
         rozpocznie)</span></p>
-      <a [routerLink]="['rate-as-seller', auction.purchaseId]"
+      <a [routerLink]="['/rate-as-seller', auction.purchaseId]"
          class="badge badge-warning text-uppercase p-2 text-wrap"
-         *ngIf="auction.isBought">Wystaw ocenę jako sprzedawca</a>
+         *ngIf="auction.isBought && !auction.alreadyRatedBySeller">Wystaw ocenę jako sprzedawca</a>
+      <p *ngIf="auction.isBought && auction.alreadyRatedBySeller"
+         class="text-success">Oceniłeś już tę transakcję jako sprzedawca</p>
     </div>
     <div class="col-md-4">
       <div *ngIf="auction.status === 'STARTED'">
