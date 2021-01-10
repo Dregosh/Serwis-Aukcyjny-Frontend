@@ -2,12 +2,14 @@
   <div class="row justify-content-center">
     <mat-card-title>{{auction.title}}</mat-card-title>
   </div>
-  <img mat-card-image [src]="photoUrl + auction.mainPhotoName" alt="Auction image" *ngIf="auction.mainPhotoName">
+  <img mat-card-image [src]="photoUrl + auction.mainPhotoName" alt="Auction image"
+       *ngIf="auction.mainPhotoName">
   <img mat-card-image src="/assets/no-photo-big.jpg" alt="Auction image" *ngIf="!auction.mainPhotoName">
   <mat-card-content>
     <div class="row justify-content-around">
-      <div *ngIf="!auction.alreadyBidded">Kup Teraz: {{auction.buyNowPrice}}</div>
-      <div *ngIf="auction.alreadyBidded">Licytuj: {{auction.bidPrice}}</div>
+      <div *ngIf="auction.status === 'CREATED'">Kup Teraz: {{auction.buyNowPrice}}</div>
+      <div *ngIf="auction.status === 'STARTED'">Licytacja w toku: {{auction.bidPrice}}</div>
+      <div *ngIf="auction.status === 'ENDED'">Aukcja zakończona</div>
     </div>
   </mat-card-content>
 </mat-card>
