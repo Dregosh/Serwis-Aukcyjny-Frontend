@@ -1,4 +1,4 @@
-import {Inject, Injectable, LOCALE_ID} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {AuctionSort} from '../model/AuctionSort';
@@ -11,7 +11,6 @@ import {CreateAuction} from '../../auctions/model/CreateAuction';
 import {FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
-import {formatDate} from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -102,5 +101,14 @@ export class AuctionService {
 
   unobserve(auctionId: number): Observable<any> {
     return this.http.post(`${this.apiUrl}auctions/${auctionId}/stop-observing`, null);
+  }
+
+  rateAsSeller(purchaseId: number, ratingForm: FormGroup): Observable<any> {
+    const sellerRatePurchaseCommand = {
+      purchaseId,
+      sellersRating: ratingForm.value.rating,
+      sellersComment: ratingForm.value.comment
+    };
+    return this.http.post(`${this.apiUrl}auctions/rate-seller`, sellerRatePurchaseCommand);
   }
 }
