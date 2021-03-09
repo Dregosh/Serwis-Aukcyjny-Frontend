@@ -8,7 +8,7 @@ export const environment = {
   photoUrl: 'http://localhost:8080/api/images/',
   keycloakUrl: 'http://localhost:8000/auth/realms/serwis-aukcyjny/protocol/openid-connect/token',
   ClientId : 'webapp',
-  ClientSecret: 'ed6ffe01-10d0-4c96-84b3-693a759f55bd',
+  ClientSecret: '37ef7fba-f9cb-4a44-b7e5-bab4a3ce9255',
 };
 
 /*
